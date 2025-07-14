@@ -1,2 +1,66 @@
+/* for project name  */
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+/* for normal text  */
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+
+/* for Title text  */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+    theme: light --default, dark;
+}
+
+/* font classess  */
+.font-logoText {
+    font-family: "Marcellus", serif;
+    font-weight: 900 ;
+    font-style: normal;
+}
+
+/* for normal text  */
+.font-signikaText {
+  font-family: "Signika Negative", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* for title  */
+.font-raleway {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+      /* colors: {
+        textColor: '#627bdb',
+        textColor: '#263a88',
+        bgColor: '#d1dbff',
+        primary: '#0ea5e9',
+        secondary: '#f050a6',
+        accent: '#f3e22b',
+      }, */
+
+
+      /* {
+        touristicaLight: {
+          primary: '#0ea5e9',
+          secondary: '#f050a6',
+          accent: '#f3e22b',
+          neutral: '#d1dbff',      // bg-base-200, cards
+          "base-100": '#d1dbff',   // main background
+          "base-content": '#627bdb', // text color
+        }, */
+/* 
+          touristicaDark: {
+          primary: '#4978FF',
+          secondary: '#FF85C1',
+          accent: '#FFF974',
+          neutral: '#1E213A',      // bg-base-200, cards
+          "base-100": '#121826',   // main background
+          "base-content": '#A5B8FF', // text color
+        }, */

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Bannner = () => {
     return (
-        <div>
+        <div className='font-signikaText text-[#263a88]'>
             This is banner
         </div>
     );
