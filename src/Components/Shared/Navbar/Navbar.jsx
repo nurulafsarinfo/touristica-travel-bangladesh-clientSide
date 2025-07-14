@@ -2,186 +2,183 @@ import React, { useState } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { NavLink } from "react-router"; // use react-router-dom for web routing
 import { FaUserCircle } from "react-icons/fa";
+import useAuth from "../../../Hooks/useAuth";
 
 const Navbar = () => {
-  // Simulate auth state (replace with your actual auth logic)
-  const [user, setUser] = useState(null);
-  // Example user object when logged in:
-  // const user = {
-  //   name: "John Doe",
-  //   email: "john@example.com",
-  //   photoURL: "https://randomuser.me/api/portraits/men/75.jpg",
-  // };
+    const { user, logOut } = useAuth();
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+    console.log('navbar user', user)
 
-  const navLinks = (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-indigo-600" : "font-signikaText"
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/community"
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-indigo-600" : "font-signikaText"
-          }
-        >
-          Community
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-indigo-600" : "font-signikaText"
-          }
-        >
-          About Us
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/trips"
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-indigo-600" : "font-signikaText"
-          }
-        >
-          Trips
-        </NavLink>
-      </li>
-    </>
-  );
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleLogout = () => {
-    // your logout logic here
-    setUser(null);
-    setDropdownOpen(false);
-  };
+    const navLinks = (
+        <>
+            <li>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        isActive ? "font-semibold text-indigo-600" : "font-signikaText"
+                    }
+                >
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/community"
+                    className={({ isActive }) =>
+                        isActive ? "font-semibold text-indigo-600" : "font-signikaText"
+                    }
+                >
+                    Community
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                        isActive ? "font-semibold text-indigo-600" : "font-signikaText"
+                    }
+                >
+                    About Us
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/trips"
+                    className={({ isActive }) =>
+                        isActive ? "font-semibold text-indigo-600" : "font-signikaText"
+                    }
+                >
+                    Trips
+                </NavLink>
+            </li>
+        </>
+    );
 
-  return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm font-signikaText px-4 md:px-10">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <label
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle lg:hidden"
-            >
-              <BiMenuAltLeft size={28} />
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              {navLinks}
-              {!user && (
-                <>
-                  <li>
-                    <NavLink to="/login" className="font-signikaText">
-                      Login
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/register" className="font-signikaText">
-                      Register
-                    </NavLink>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-          <NavLink
-            to="/"
-            className="btn btn-ghost text-xl font-logoText tracking-widest"
-          >
-            Touristica
-          </NavLink>
-        </div>
+    const handleLogout = () => {
+        // your logout logic here
+        logOut()
+            .then(console.log('User loged out'))
+        setDropdownOpen(false);
+    };
 
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-3">{navLinks}</ul>
-        </div>
-
-        <div className="navbar-end">
-          {!user ? (
-            <>
-              <NavLink
-                to="/login"
-                className="btn btn-outline border-[#0ea5e9] hover:bg-[#0ea5e9] mr-3 py-2 px-3 hidden md:inline-block"
-              >
-                Log In
-              </NavLink>
-              <NavLink
-                to="/register"
-                className="btn bg-[#0ea5e9] py-2 px-4 hidden md:inline-block"
-              >
-                Register
-              </NavLink>
-            </>
-          ) : (
-            <div className="relative" tabIndex={0}>
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="btn btn-ghost btn-circle avatar flex items-center space-x-2"
-              >
-                {user.photoURL ? (
-                  <img
-                    src={user.photoURL}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full"
-                  />
-                ) : (
-                  <FaUserCircle size={32} />
-                )}
-                <span className="hidden md:inline-block font-semibold">
-                  {user.name}
-                </span>
-              </button>
-              {dropdownOpen && (
-                <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-56 absolute right-0 z-50">
-                  <li className="pointer-events-none px-3 py-2">
-                    <div className="font-semibold">{user.name}</div>
-                    <div className="text-xs opacity-70">{user.email}</div>
-                  </li>
-                  <li>
+    return (
+        <div>
+            <div className="navbar bg-base-100 shadow-sm font-signikaText px-4 md:px-10">
+                <div className="navbar-start">
+                    <div className="dropdown">
+                        <label
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-ghost btn-circle lg:hidden"
+                        >
+                            <BiMenuAltLeft size={28} />
+                        </label>
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                        >
+                            {navLinks}
+                            {!user && (
+                                <>
+                                    <li>
+                                        <NavLink to="/login" className="font-signikaText">
+                                            Login
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/register" className="font-signikaText">
+                                            Register
+                                        </NavLink>
+                                    </li>
+                                </>
+                            )}
+                        </ul>
+                    </div>
                     <NavLink
-                      to="/dashboard"
-                      onClick={() => setDropdownOpen(false)}
+                        to="/"
+                        className="btn btn-ghost text-xl font-logoText tracking-widest"
                     >
-                      Dashboard
+                        Touristica
                     </NavLink>
-                  </li>
-                  {/* Optional: Offer Announcements */}
-                  <li>
-                    <NavLink
-                      to="/offer-announcements"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      Offer Announcements
-                    </NavLink>
-                  </li>
-                  <li>
-                    <button onClick={handleLogout} className="text-error">
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              )}
+                </div>
+
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="menu menu-horizontal px-1 space-x-3">{navLinks}</ul>
+                </div>
+
+                {/* NAVBAR END  */}
+                <div className="navbar-end">
+                    {!user ? (
+                        <>
+                            <NavLink
+                                to="/login"
+                                className="btn btn-outline border-[#0ea5e9] hover:bg-[#0ea5e9] mr-3 py-2 px-3 hidden md:inline-block"
+                            >
+                                Log In
+                            </NavLink>
+                            <NavLink
+                                to="/register"
+                                className="btn bg-[#0ea5e9] py-2 px-4 hidden md:inline-block"
+                            >
+                                Register
+                            </NavLink>
+                        </>
+                    ) : (
+                        <div className="relative" tabIndex={0}>
+                            <button
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                                title="Click here"
+                                className="btn btn-ghost btn-circle avatar flex items-center justify-center border border-indigo-500 space-x-4"
+                            >
+                                {user.photoURL ? (
+                                    <img
+                                        src={user.photoURL}
+                                        alt="Profile"
+                                        className="w-10 h-10 rounded-full"
+                                    />
+                                ) : (
+                                    <FaUserCircle size={32} />
+                                )}
+
+                            </button>
+                            {dropdownOpen && (
+                                <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-56 absolute right-0 z-50">
+                                    <li className="pointer-events-none px-3 py-2">
+                                        <div className="font-semibold">{user.displayName}</div>
+                                        <div className="text-xs opacity-70">{user.email}</div>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/dashboard"
+                                            onClick={() => setDropdownOpen(false)}
+                                        >
+                                            Dashboard
+                                        </NavLink>
+                                    </li>
+                                    {/* Optional: Offer Announcements */}
+                                    <li>
+                                        <NavLink
+                                            to="/offer-announcements"
+                                            onClick={() => setDropdownOpen(false)}
+                                        >
+                                            Offer Announcements
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleLogout} className="text-error">
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Navbar;
