@@ -32,9 +32,9 @@ const Register = () => {
                     last_log_in: new Date().toISOString(),
                 }
 
-                // const userRes = await axiosInstance.post('/users', userInfo);
+                const userRes = await axiosInstance.post('/users', userInfo);
 
-                // console.log(userRes.data);
+                console.log(userRes.data);
 
 
                 //Update user profile in firebase
@@ -135,7 +135,7 @@ const Register = () => {
                         </div>
 
 
-                        <button type="submit" className="btn bg-[#0ea5e9] w-full">Register</button>
+                        <button type="submit" className="btn bg-[#0ea5e9] w-full text-white">Register</button>
                         <p className="text-sm mt-2 text-center">
                             Already have an account?{' '}
                             <Link to="/login" className="text-secondary hover:underline">Login here</Link>
