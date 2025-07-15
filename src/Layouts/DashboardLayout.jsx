@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { NavLink } from 'react-router';
+import { Link, NavLink, Outlet } from 'react-router';
+import useUserRole from '../Hooks/useUserRole';
+import useAuth from '../Hooks/useAuth';
 
 const DashboardLayout = () => {
+    const { user } = useAuth();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { role, roleLoading } = useUserRole();
+
+    if (roleLoading) return <p className="text-center mt-10 text-lg">Loading...</p>;
 
     return (
         <div className="min-h-screen flex font-signikaText text-[#263a88] bg-[#d1dbff]">
@@ -23,94 +29,75 @@ const DashboardLayout = () => {
 
             {/* Sidebar */}
             <aside
-                className={`fixed md:static top-0 left-0 z-40 h-screen md:h-auto w-64 bg-white shadow-xl border-r border-[#0ea5e9] transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed md:static top-0 left-0 z-40 h-screen md:h-auto w-64 bg-white shadow-xl border-r border-[#0ea5e9] overflow-y-auto transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     } md:translate-x-0 transition-transform duration-200 ease-in-out`}
             >
-                <div className="p-6 border-b border-[#0ea5e9] text-2xl font-logoText text-[#0ea5e9]">
-                    Touristica
-                </div>
+                <NavLink to={'/home'}>
+                    <div className="p-6 border-b border-[#0ea5e9] text-2xl font-logoText text-[#0ea5e9]">
+                        Touristica
+                    </div>
+                </NavLink>
+                
+                <NavLink
+                    to=""
+                >
+                    <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-4">
+                        <img
+                            src={user?.photoURL}
+                            alt="user"
+                            className="w-12 h-12 rounded-full object-cover shadow"
+                        />
+                        <div>
+                            <p className="text-base font-raleway font-semibold">{user?.displayName}</p>
+                            <p className="text-sm text-gray-500 capitalize">{role || 'Traveller'}</p>
+                        </div>
+                    </div>
+                </NavLink>
+
                 <nav className="p-4 space-y-2 font-raleway text-[1rem]">
-                    <NavLink to={'/dashboard'} className={({ isActive }) =>
+
+                    <NavLink to="/dashboard/profile" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
-                            : 'hover:bg-[#0ea5e9]/30'
-                        }`
+                            : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Dashboard
+                        Profile
                     </NavLink>
 
-                    <NavLink to={'/tours'} className={({ isActive }) =>
+                    <NavLink to="/bookings" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
-                            : 'hover:bg-[#0ea5e9]/30'
-                        }`
+                            : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Tours
+                        My Bookings
                     </NavLink>
 
-                    <NavLink to={'/bookings'} className={({ isActive }) =>
+                    <NavLink to="/stories" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
-                            : 'hover:bg-[#0ea5e9]/30'
-                        }`
+                            : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Bookings
+                        Manage Stories
                     </NavLink>
 
-                    <NavLink to={'/users'} className={({ isActive }) =>
+                    <NavLink to="/reviews" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
-                            : 'hover:bg-[#0ea5e9]/30'
-                        }`
+                            : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Users
-                    </NavLink>
-
-                    <NavLink to={'/reviews'} className={({ isActive }) =>
-                        `block px-4 py-2 rounded transition-colors duration-200 ${isActive
-                            ? 'bg-[#0ea5e9]/20 font-semibold'
-                            : 'hover:bg-[#0ea5e9]/30'
-                        }`
-                    }>
-                        Reviews
+                        Add Stories
                     </NavLink>
                 </nav>
             </aside>
 
             {/* Main Content */}
             <main className="flex-1 p-4 md:p-8">
-                <header className="mb-6">
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-raleway text-[#0ea5e9]">
-                        Dashboard
-                    </h1>
-                    <p className="mt-2 text-sm md:text-base text-[#263a88]/70">
-                        Welcome to the{" "}
-                        <span className="font-logoText text-[#f050a6]">Touristica</span> admin dashboard!
-                    </p>
-                </header>
 
-                {/* Main Section */}
-                <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {/* Placeholder cards for future content */}
-                    <div className="bg-white p-6 rounded-xl shadow-md border border-[#0ea5e9]/20">
-                        <h2 className="text-lg font-raleway font-semibold text-[#0ea5e9]">Quick Overview</h2>
-                        <p className="mt-2 text-sm text-[#263a88]/80">Analytics, reports, and summary go here.</p>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-xl shadow-md border border-[#0ea5e9]/20">
-                        <h2 className="text-lg font-raleway font-semibold text-[#0ea5e9]">Recent Activity</h2>
-                        <p className="mt-2 text-sm text-[#263a88]/80">Track your recent user actions or logs.</p>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-xl shadow-md border border-[#0ea5e9]/20">
-                        <h2 className="text-lg font-raleway font-semibold text-[#0ea5e9]">Upcoming Tasks</h2>
-                        <p className="mt-2 text-sm text-[#263a88]/80">Your pending approvals or reminders.</p>
-                    </div>
-                </section>
+                {/* Dynamic Page Outlet */}
+                <Outlet />
             </main>
         </div>
     );
 };
 
 export default DashboardLayout;
-

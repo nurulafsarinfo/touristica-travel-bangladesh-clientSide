@@ -6,7 +6,9 @@ import Register from '../Pages/SignUPpage/Register';
 import Forbidden from '../Components/Shared/Navbar/Forbidden';
 import Login from '../Pages/SignUPpage/Login';
 import DashboardLayout from '../Layouts/DashboardLayout';
-import PrivareRoute from '../Routes/PrivareRoute';
+import PrivateRoute from '../Routes/PrivateRoute';
+import Profile from '../DashboardComponent/Profile';
+import Dashboard from '../DashboardComponent/Dashboard';
 
 const router = createBrowserRouter([
     {
@@ -33,12 +35,17 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivareRoute>
+        element: <PrivateRoute>
             <DashboardLayout></DashboardLayout>
-        </PrivareRoute>,
+        </PrivateRoute>,
         children: [
             {
                 path: '',
+                Component: Dashboard
+            },
+            {
+                path: 'profile',
+                Component: Profile
             }
         ]
     }
