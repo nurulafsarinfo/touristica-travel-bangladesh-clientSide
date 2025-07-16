@@ -7,7 +7,7 @@ import Forbidden from '../Components/Shared/Navbar/Forbidden';
 import Login from '../Pages/SignUPpage/Login';
 import DashboardLayout from '../Layouts/DashboardLayout';
 import PrivateRoute from '../Routes/PrivateRoute';
-import Profile from '../DashboardComponent/Profile';
+import Profile from '../DashboardComponent/Profile/Profile';
 import Dashboard from '../DashboardComponent/Dashboard';
 
 const router = createBrowserRouter([
