@@ -9,7 +9,7 @@ const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    
+
 
 
 
@@ -33,12 +33,14 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider)
     }
 
-    const updateUserProfile = profileInfo => {
-        return updateProfile(auth.currentUser, profileInfo)
+    const updateUserProfile = async (profileInfo) => {
+        await updateProfile(auth.currentUser, profileInfo)
+        return;
     }
 
-    useEffect (() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser)=> {
+
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
         })

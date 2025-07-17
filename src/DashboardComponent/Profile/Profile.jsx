@@ -14,14 +14,17 @@ const Profile = () => {
     console.log('data updated', user);
     const { role, roleLoading } = useUserRole();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // eslint-disable-next-line no-unused-vars
+    const [ updatedName, setUpdatedName ] = useState('');
     const [isJoinGuidModalOpen, setIsJoinGuideModalOpen] = useState(false);
 
 
     const handleSave = (updatedData) => {
-console.log("update data", updatedData)
+
         updateUserProfile(updatedData)
-            .then(() => {
-                console.log('profile updaaaaaat')
+            .then(async () => {
+                setUpdatedName(updatedData);
+                console.log('profile updaaaaaat', updatedData)
                 toast.success('✅ Profile updated!');
             })
             .catch((error) => {
