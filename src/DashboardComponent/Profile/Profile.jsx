@@ -3,50 +3,22 @@ import useAuth from '../../Hooks/useAuth';
 import useUserRole from '../../Hooks/useUserRole';
 import { Link } from 'react-router';
 import EditProfileModal from './EditProfileModal';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { Toaster } from 'react-hot-toast'
+import JoinGuideModal from './JoinAsGuid';
 
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
     console.log('data updated', user);
     const { role, roleLoading } = useUserRole();
-    // const axiosSecure = useAxiosSecure();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // const queryClient = useQueryClient();
-
-    // const updatedUserMutation = useMutation({
-    //     mutationFn: async (updatedData) => {
-    //         const res = await axiosSecure.patch(`/users/${user.email}`, updatedData);
-    //         console.log('data updated');
-    //         return res.data;
-    //     },
-    //     onSuccess: () => {
-    //         toast.success('✅ Profile updated!');
-    //         queryClient.invalidateQueries({ queryKey: ['userRole', user.email] });
-    //         setIsModalOpen(false);
-    //     },
-    //     onError: () => {
-    //         toast.error('❌ Failed to update profile')
-    //     }
-    // })
+    const [isJoinGuidModalOpen, setIsJoinGuideModalOpen] = useState(false);
 
 
     const handleSave = (updatedData) => {
-        console.log('updaadddddd ata', updatedData)
-        // toast.promise(
-        //     updatedUserMutation.mutateAsync(updatedData),
-        //     {
-        //         loading: 'Updating...',
-        //         success: '✅ Profile updated!',
-        //         error: '❌ Failed to update profile',
-        //     }
-        // )
-
+console.log("update data", updatedData)
         updateUserProfile(updatedData)
             .then(() => {
                 console.log('profile updaaaaaat')
@@ -59,7 +31,7 @@ const Profile = () => {
 
     }
 
-<Toaster position='top-right' reverseOrder={false} />
+    <Toaster position='top-right' reverseOrder={false} />
 
     if (roleLoading) {
         return (
@@ -88,14 +60,13 @@ const Profile = () => {
                         <button onClick={() => setIsModalOpen(true)} className="px-4 py-2 bg-[#0ea5e9] hover:bg-[#0ea5e9]/90 text-white rounded-xl shadow font-semibold transition duration-200">
                             Edit Profile
                         </button>
-                        <Link to="/dashboard/join-guide">
-                            <button className="px-4 py-2 bg-[#f050a6] hover:bg-[#f050a6]/90 text-white rounded-xl shadow font-semibold transition duration-200">
-                                Join as Tour Guide
-                            </button>
-                        </Link>
+
+                        <button onClick={() => setIsJoinGuideModalOpen(true)} className="px-4 py-2 bg-[#f050a6] hover:bg-[#f050a6]/90 text-white rounded-xl shadow font-semibold transition duration-200">
+                            Join as Tour Guide
+                        </button>
                     </div>
 
-
+                    {/* Edit profil modal  */}
                     <EditProfileModal
                         isOpen={isModalOpen}
                         onRequestClose={() => setIsModalOpen(false)}
@@ -109,6 +80,14 @@ const Profile = () => {
                     >
 
                     </EditProfileModal>
+
+                    {/* Join guide modal  */}
+                    <JoinGuideModal
+                        isOpen={isJoinGuidModalOpen}
+                        onRequestClose={() => setIsJoinGuideModalOpen(false)}
+                    >
+
+                    </JoinGuideModal>
 
                 </div>
             </div>

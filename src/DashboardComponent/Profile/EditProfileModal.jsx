@@ -16,7 +16,7 @@ const EditProfileModal = ({ isOpen, onRequestClose, userData, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ name, photoURL });
+    onSave({ displayName: name, photoURL });
     onRequestClose();
   };
 
