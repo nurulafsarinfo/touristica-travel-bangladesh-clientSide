@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../Layouts/RootLayout';
-import Bannner from '../Pages/Home/Banner/Bannner';
 import Register from '../Pages/SignUPpage/Register';
 import Forbidden from '../Components/Shared/Navbar/Forbidden';
 import Login from '../Pages/SignUPpage/Login';
@@ -9,6 +8,8 @@ import DashboardLayout from '../Layouts/DashboardLayout';
 import PrivateRoute from '../Routes/PrivateRoute';
 import Profile from '../DashboardComponent/Profile/Profile';
 import Dashboard from '../DashboardComponent/Dashboard';
+import HomeLayout from '../Layouts/HomeLayout';
+import PackageDetails from '../Pages/Home/PackageAndGuidTabs/PackageDetails';
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Bannner,
+                Component: HomeLayout,
+            },
+            {
+                path: '/packages/:id',
+                Component: PackageDetails,
             },
             {
                 path: '/register',

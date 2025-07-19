@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddStory = () => {
+const PackageDetails = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const AddStory = () => {
     );
 };
 
-export default AddStory;
+export default PackageDetails;

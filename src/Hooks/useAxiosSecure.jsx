@@ -4,36 +4,39 @@ import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'http://localhost:5000',
+    withCredentials: true,
 })
 
 
 const useAxiosSecure = () => {
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const navigate = useNavigate();
-    const { logOut } = useAuth();
 
-    axiosSecure.interceptors.request.use(config => {
-        config.headers.Authorization = `Bearer ${user.accessToken}`
-
-        return config;
-    }, error => {
-        return Promise.reject(error);
-    })
+    axiosSecure.interceptors.request.use(
+        config => {
+            const token = user?.accessToken;
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        }, error => {
+            return Promise.reject(error);
+        })
 
 
     axiosSecure.interceptors.response.use(res => {
         return res;
     }), error => {
-        console.log('inside res interceptor', error.status );
-        const status = error.status;
-        if(status === 403){
+        console.log('inside res interceptor', error.status);
+        const status = error.response?.status;
+        if (status === 403) {
             navigate('/forbidden')
         }
-        else if(status === 401){
+        else if (status === 401) {
             logOut()
                 .then(() => {
-                    navigate('/login')
+                   return navigate('/login')
                 })
                 .catch(() => { })
         }
