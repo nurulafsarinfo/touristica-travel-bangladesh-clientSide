@@ -81,7 +81,7 @@ const MyBookings = () => {
                     <span
                       className={`badge ${
                         booking.status === 'accepted'
-                          ? 'badge-success'
+                          ? 'badge-success '
                           : booking.status === 'rejected'
                           ? 'badge-error'
                           : booking.status === 'in review'
@@ -96,7 +96,7 @@ const MyBookings = () => {
                     {booking.status === 'pending' && (
                       <>
                         <button
-                          onClick={() => navigate(`/payment/${booking._id}`)}
+                          onClick={() => navigate(`/dashboard/payment/${booking._id}`)}
                           className="btn btn-sm bg-[#f050a6] hover:bg-[#e73d99] text-white"
                         >
                           Pay

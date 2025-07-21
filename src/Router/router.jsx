@@ -13,6 +13,7 @@ import PackageDetails from '../Pages/Home/PackageAndGuidTabs/PackageDetails';
 import AllTrips from '../Components/AllTrips/AllTrips';
 import GuideProfile from '../Components/Guides/GuideProfile';
 import MyBookings from '../DashboardComponent/TouristComponent/MyBookings';
+import Payment from '../DashboardComponent/TouristComponent/Payment/Payment';
 
 const router = createBrowserRouter([
     {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
             {
                 path: 'bookings/:email',
                 Component: MyBookings,
+            },
+            {
+                path: 'payment/:id',
+                Component: Payment,
             }
         ]
     }
