@@ -79,21 +79,24 @@ const MyBookings = () => {
                   <td>{booking.price} tk</td>
                   <td>
                     <span
-                      className={`badge ${
-                        booking.status === 'accepted'
-                          ? 'badge-success '
-                          : booking.status === 'rejected'
+                      className={`badge ${booking.status === 'accepted'
+                        ? 'badge-success '
+                        : booking.status === 'rejected'
                           ? 'badge-error'
                           : booking.status === 'in review'
-                          ? 'badge-info'
-                          : 'badge-warning'
-                      }`}
+                            ? 'badge-info'
+                            : booking.status === 'paid'
+                              ? 'badge-success text-white'
+                              : booking.status === 'cancelled'
+                                ? 'badge-error text-red-500'
+                                : 'badge-warning'
+                        }`}
                     >
                       {booking.status}
                     </span>
                   </td>
                   <td className="flex gap-2 justify-center items-center">
-                    {booking.status === 'pending' && (
+                    {booking.status === 'accepted' && (
                       <>
                         <button
                           onClick={() => navigate(`/dashboard/payment/${booking._id}`)}
@@ -101,6 +104,11 @@ const MyBookings = () => {
                         >
                           Pay
                         </button>
+
+                      </>
+                    )}
+                    {booking.status === 'pending' && (
+                      <>
                         <button
                           onClick={() => handleCancel(booking._id)}
                           className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"

@@ -78,7 +78,7 @@ const PackageDetails = () => {
                 cancelButtonColor: '#00a884',
             }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.cancel) {
-                    navigate('/my-bookings');
+                    navigate(`/dashboard/bookings/${user.email}`);
                 }
             })
         },
@@ -116,7 +116,6 @@ const PackageDetails = () => {
                     created_at: new Date().toISOString(),
                     status: 'pending',
                 };
-                console.log('booking sdata', bookingData);
                 mutate(bookingData);
             }
 
