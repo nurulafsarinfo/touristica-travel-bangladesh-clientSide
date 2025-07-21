@@ -13,11 +13,11 @@ const TourismSection = () => {
     const { data: packages = [], isLoading } = useQuery({
         queryKey: ['packagesData'],
         queryFn: async () => {
-            try{
+            try {
                 const res = await axiosSecure.get('/packages/random');
-                
+
                 console.log('packages data', res.data);
-                
+
                 return res.data;
             } catch (err) {
                 console.error('Error fetching packages:', err);
@@ -30,7 +30,7 @@ const TourismSection = () => {
     const { data: guides = [] } = useQuery({
         queryKey: ['guidesData'],
         queryFn: async () => {
-            try{
+            try {
 
                 const res = await axiosSecure.get('/guides/random');
                 return res.data;
@@ -40,7 +40,7 @@ const TourismSection = () => {
         }
     })
 
-    if(isLoading) return <p>Loading...</p>
+    if (isLoading) return <p>Loading...</p>
 
 
     return (
@@ -79,20 +79,17 @@ const TourismSection = () => {
                     <TabPanel>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {packages.map(pkg => (
-                                
+
                                 <div key={pkg._id} className="bg-white rounded-xl shadow hover:shadow-xl transition p-4">
-                                    <img src={ pkg.images[0]} alt={pkg.title} className="w-full h-48 object-cover rounded-lg mb-4" />
+                                    <img src={pkg.images[0]} alt={pkg.title} className="w-full h-48 object-cover rounded-lg mb-4" />
                                     <h3 className="text-xl font-bold text-[#263a88] mb-1">{pkg.title}</h3>
                                     <p className="text-sm text-gray-500 mb-1">{pkg.type}</p>
                                     <div className='flex justify-between'>
                                         <p className="text-[#f050a6] font-semibold text-lg mb-3">${pkg.price}</p>
 
-                                        <span className='flex items-center gap-1 text-[#263a88]'> <FaStar fill='gold'/><FaStar fill='gold'/><FaStar fill='gold'/>  {pkg.rating}</span>
+                                        <span className='flex items-center gap-1 text-[#263a88]'> <FaStar fill='gold' /><FaStar fill='gold' /><FaStar fill='gold' />  {pkg.rating}</span>
                                     </div>
 
-{
-    console.log(pkg)
-}
                                     <Link
                                         to={`/packages/${pkg._id}`}
                                         className="inline-block bg-[#0ea5e9] text-white px-4 py-2 rounded hover:bg-[#0ea5e9]/90"
@@ -110,22 +107,26 @@ const TourismSection = () => {
 
                     {/* 🧑‍✈️ Guides Tab */}
                     <TabPanel>
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                            {guides.map(guide => (
-                                <div key={guide._id} className="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
-                                    <img src={guide.photoURL} alt={guide.name} className="w-full h-44 object-cover rounded-lg mb-4" />
-                                    <h3 className="text-lg font-bold text-[#263a88]">{guide.name}</h3>
-                                    <p className="text-sm text-gray-500 mb-2">{guide.speciality}</p>
-                                    <p className="text-sm text-gray-500 mb-4">Experience: {guide.experience} years</p>
-                                    <Link
-                                        to={`/guides/${guide._id}`}
-                                        className="inline-block bg-[#f050a6] text-white px-4 py-2 rounded hover:bg-[#f050a6]/90"
-                                    >
-                                        View Details
-                                    </Link>
+                        {
+                            guides.length < 1 ?
+                                <div className='text-center'>Guides are empty!</div>
+                                : <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                                    {guides.map(guide => (
+                                        <div key={guide._id} className="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
+                                            <img src={guide.photoURL} alt={guide.name} className="w-full h-44 object-cover rounded-lg mb-4" />
+                                            <h3 className="text-lg font-bold text-[#263a88]">{guide.name}</h3>
+                                            <p className="text-sm text-gray-500 mb-2">{guide.title}</p>
+                                            <p className="text-sm text-gray-500 mb-4">Experience: {guide.experience} years</p>
+                                            <Link
+                                                to={`/guides/${guide._id}`}
+                                                className="inline-block bg-[#f050a6] text-white px-4 py-2 rounded hover:bg-[#f050a6]/90"
+                                            >
+                                                View Details
+                                            </Link>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
+                        }
                     </TabPanel>
                 </Tabs>
             </div>

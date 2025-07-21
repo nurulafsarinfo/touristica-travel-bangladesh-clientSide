@@ -20,7 +20,9 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
 
     const updatedUserMutation = useMutation({
         mutationFn: async (formData) => {
-            const res = await axiosSecure.post('/beGuideRequest', {...formData, name: user.displayName, email: user.email});
+            const res = await axiosSecure.post('/beGuideRequest', 
+                {...formData, name: user.displayName, email: user.email, photoURL: user.photoURL}
+            );
             console.log('res save db data', res)
             return res.data;
         },
