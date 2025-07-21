@@ -43,7 +43,7 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
-                    to="/trips"
+                    to="/all-trips"
                     className={({ isActive }) =>
                         isActive ? "font-semibold text-indigo-600" : "font-signikaText"
                     }
