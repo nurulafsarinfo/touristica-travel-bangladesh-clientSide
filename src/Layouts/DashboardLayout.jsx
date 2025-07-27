@@ -80,7 +80,7 @@ const DashboardLayout = () => {
                         Manage Stories
                     </NavLink>
 
-                    <NavLink to="/reviews" className={({ isActive }) =>
+                    <NavLink to="/dashboard/add-Story" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
                             : 'hover:bg-[#0ea5e9]/30'}`

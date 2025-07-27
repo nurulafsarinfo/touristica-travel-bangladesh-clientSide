@@ -14,6 +14,7 @@ import AllTrips from '../Components/AllTrips/AllTrips';
 import GuideProfile from '../Components/Guides/GuideProfile';
 import MyBookings from '../DashboardComponent/TouristComponent/MyBookings';
 import Payment from '../DashboardComponent/TouristComponent/Payment/Payment';
+import Add_Story from '../DashboardComponent/TouristComponent/Add_Story';
 
 const router = createBrowserRouter([
     {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'profile',
-                Component: Profile
+                Component: Profile,
             },
             {
                 path: 'bookings/:email',
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
             {
                 path: 'payment/:id',
                 Component: Payment,
+            },
+            {
+                path: 'add-Story',
+                Component: Add_Story,
             }
         ]
     }
