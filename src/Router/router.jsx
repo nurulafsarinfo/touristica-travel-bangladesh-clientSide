@@ -17,6 +17,7 @@ import Payment from '../DashboardComponent/TouristComponent/Payment/Payment';
 import Add_Story from '../DashboardComponent/TouristComponent/Add_Story';
 import ManageStories from '../DashboardComponent/TouristComponent/ManageStories/ManageStories';
 import EditStory from '../DashboardComponent/TouristComponent/ManageStories/EditStory';
+import AllStory from '../Pages/AllStory/AllStory';
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: '/all-trips',
                 Component: AllTrips,
+            },
+            {
+                path: '/all-stories',
+                Component: AllStory,
             },
             {
                 path: '/guides/:id',
