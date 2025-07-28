@@ -72,7 +72,7 @@ const DashboardLayout = () => {
                         My Bookings
                     </NavLink>
 
-                    <NavLink to="/stories" className={({ isActive }) =>
+                    <NavLink to="/dashboard/manage-stories" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
                             : 'hover:bg-[#0ea5e9]/30'}`
