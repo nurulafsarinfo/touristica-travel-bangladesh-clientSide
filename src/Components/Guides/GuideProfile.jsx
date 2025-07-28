@@ -22,14 +22,14 @@ const GuideProfile = () => {
   });
 
   // Fetch guide's stories from the server
-  // const { data: stories, isLoading: isLoadingStories, error: errorStories } = useQuery({
-  //   queryKey: ['guideStories', id],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get(`/stories/guide/${id}`);
-  //     return res.data;
-  //   },
-  //   enabled: !!id, // Only run query if id is available
-  // });
+  const { data: stories, error: errorStories } = useQuery({
+    queryKey: ['guideStories', id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/stories/${guide?.email}`);
+      return res.data;
+    },
+    enabled: !!id, // Only run query if id is available
+  });
   
   const isLoading = isLoadingProfile ;
 
@@ -89,13 +89,13 @@ const GuideProfile = () => {
         </div>
 
         {/* Stories Section */}
-        {/* <div className="mt-16">
+        <div className="mt-16">
           <h2 className="text-3xl font-raleway font-bold text-[#263a88] text-center mb-10">
             Stories from {guide.name}
           </h2>
           {stories && stories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {stories.map(story => (
+              {stories?.map(story => (
                 <div key={story._id} className="bg-white rounded-lg shadow-lg overflow-hidden group transition-transform duration-300 hover:-translate-y-2">
                   <figure className="h-56 overflow-hidden">
                     <img src={story.spotPhoto} alt={story.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -113,7 +113,7 @@ const GuideProfile = () => {
           ) : (
             <p className="text-center text-gray-500">This guide hasn't shared any stories yet.</p>
           )}
-        </div> */}
+        </div>
 
       </div>
     </div>

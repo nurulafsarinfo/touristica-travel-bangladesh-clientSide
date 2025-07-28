@@ -6,11 +6,12 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useAuth from '../../Hooks/useAuth';
 
 const JoinGuideModal = ({ isOpen, onRequestClose }) => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const [formData, setFormData] = useState({
         title: '',
         reason: '',
         cvLink: '',
+        experience: '',
     });
 
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -20,8 +21,8 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
 
     const updatedUserMutation = useMutation({
         mutationFn: async (formData) => {
-            const res = await axiosSecure.post('/beGuideRequest', 
-                {...formData, name: user.displayName, email: user.email, photoURL: user.photoURL}
+            const res = await axiosSecure.post('/beGuideRequest',
+                { ...formData, name: user?.displayName, email: user?.email, photoURL: user?.photoURL }
             );
             console.log('res save db data', res)
             return res.data;
@@ -57,7 +58,7 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
             );
 
             setIsSuccessOpen(true);
-            setFormData({ title: '', reason: '', cvLink: ''});
+            setFormData({ title: '', reason: '', cvLink: '' });
 
         } catch (err) {
             console.error('Application failed:', err);
@@ -76,7 +77,7 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
             <Modal
                 isOpen={isOpen}
                 onRequestClose={onRequestClose}
-                className="bg-white rounded-xl p-6 w-full max-w-xl mx-auto mt-24 shadow-xl outline-none"
+                className="bg-white rounded-xl p-6 w-full max-w-xl mx-auto mt-10 shadow-xl outline-none overflow-y-scroll"
                 overlayClassName="fixed inset-0 bg-black/50 z-50 flex justify-center items-start"
             >
                 <h2 className="text-xl font-bold mb-4 text-[#263a88]">Tour Guide Application</h2>
@@ -90,6 +91,17 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
                             required
                             className="w-full px-4 py-2 border rounded"
                             placeholder="e.g., Mountain Guide Expert"
+                            />
+                    </div>
+                    <div>
+                        <label className="block mb-1">Your Guide Experience</label>
+                        <input
+                            name="experience"
+                            value={formData.experience}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border rounded"
+                            placeholder="e.g.,  Guide experience '4/6 years'"
                         />
                     </div>
                     <div>
@@ -101,7 +113,7 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
                             required
                             rows={4}
                             className="w-full px-4 py-2 border rounded"
-                        />
+                            />
                     </div>
                     <div>
                         <label className="block mb-1">CV Link</label>
@@ -113,7 +125,7 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
                             type="url"
                             className="w-full px-4 py-2 border rounded"
                             placeholder="https://example.com/my-cv"
-                        />
+                            />
                     </div>
                     <div className="flex justify-end gap-2">
                         <button
@@ -137,19 +149,20 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
             <Modal
                 isOpen={isSuccessOpen}
                 onRequestClose={closeBothModals}
-                className="bg-white rounded-xl p-6 w-full max-w-md mx-auto mt-40 shadow-xl outline-none"
+                className="bg-white rounded-xl p-6 w-full max-w-md mx-auto mt-40 shadow-xl outline-none "
                 overlayClassName="fixed inset-0 bg-black/50 z-50 flex justify-center items-start"
-            >
+                >
                 <h3 className="text-xl font-bold text-green-600 mb-4">🎉 Application Submitted!</h3>
                 <p className="text-gray-700">We'll review your application shortly.</p>
                 <div className="mt-6 flex justify-end">
                     <button
                         onClick={closeBothModals}
                         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    >
+                        >
                         Close
                     </button>
                 </div>
+                    
             </Modal>
         </>
     );
