@@ -32,7 +32,7 @@ const DashboardLayout = () => {
                 className={`fixed md:static top-0 left-0 z-40 h-screen md:h-auto w-64 bg-white shadow-xl border-r border-[#0ea5e9] overflow-y-auto transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     } md:translate-x-0 transition-transform duration-200 ease-in-out`}
             >
-                <NavLink to={'/home'}>
+                <NavLink to={'/'}>
                     <div className="p-6 border-b border-[#0ea5e9] text-2xl font-logoText text-[#0ea5e9]">
                         Touristica
                     </div>
@@ -101,7 +101,7 @@ const DashboardLayout = () => {
 
 
                     {
-                        role === 'guide' || role === 'admin' ?
+                        role === 'guide' || role !== 'admin' ?
                             <NavLink to={`/dashboard/assigned-tours/${user.email}`} className={({ isActive }) =>
                                 `block px-4 py-2 rounded transition-colors duration-200 ${isActive
                                     ? 'bg-[#0ea5e9]/20 font-semibold'

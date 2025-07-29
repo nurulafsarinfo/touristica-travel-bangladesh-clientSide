@@ -1,15 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import ReactConfetti from 'react-confetti';
+
+
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useEffect(() => {
+    const updateSize = () => {
+      setSize([window.innerWidth, window.innerHeight])
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+
+  }, []);
+  return size;
+}
+
+
 
 const MyBookings = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { width, height } = useWindowSize();
+
+  const [ showCongratulations, setShowCongratulations ] = useState(false);
+
+  // step: 1 of confetti
+  const {data: bookingInfo } = useQuery({
+    queryKey: ['bookingCount', user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/bookings/count/${user.email}`);
+      return res.data;
+    }
+  })
+
+console.log('booking info count', bookingInfo)
+
+
+  // step: 2
+  useEffect(()=> {
+    if(bookingInfo?.count > 3 && !sessionStorage.getItem('congratsShown')) {
+      setShowCongratulations(true);
+      sessionStorage.setItem('congratsShown', 'true')
+
+      const timer = setTimeout(() => {
+        setShowCongratulations(false);
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  },[bookingInfo])
+
+
 
   const { data: bookings = [], isLoading } = useQuery({
     queryKey: ['myBookings', user?.email],
@@ -51,6 +102,33 @@ const MyBookings = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 font-signikaText">
+
+      {/* step: 3  */}
+      {
+        showCongratulations && (
+          <>
+            <ReactConfetti
+                width={width}
+                height={height}
+                recycle={false}
+                numberOfPieces={700}
+                gravity={0.1}
+                className='!z-50'
+            />
+
+          {/* message  */}
+          <div className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 rounded-2xl shadow-2xl text-center z-50 bg-white animate-bounce'>
+            <h2 className='text-3xl font-bold mb-2 text-blue-900'>Congratulations!</h2>
+            <p className='text-lg text-blue-950'>You've booked more then 3 tours with us!</p>
+            <p>Thank you for being a valued tranveler.</p>
+          </div>
+
+
+
+          </>
+        )
+      }
+
       <h2 className="text-2xl font-bold text-[#263a88] mb-6">My Bookings</h2>
 
       <div className="bg-base-100 shadow rounded-lg overflow-hidden">
