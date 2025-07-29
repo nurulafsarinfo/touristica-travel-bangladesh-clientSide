@@ -18,6 +18,7 @@ const Profile = () => {
     console.log('data updated', user);
     const { role, roleLoading } = useUserRole();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [updatedName, setUpdatedName] = useState('');
     const [isJoinGuidModalOpen, setIsJoinGuideModalOpen] = useState(false);
 
@@ -116,6 +117,9 @@ const Profile = () => {
                 </div>
             </div>
 
+            {
+                statsLoading && <p>States Loading...</p>
+            }
             {role === 'admin' && (
                 <div className="mt-8 bg-[#f9f9f9] p-6 rounded-lg shadow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
                     <div className="bg-white rounded-xl p-4 shadow-md border">

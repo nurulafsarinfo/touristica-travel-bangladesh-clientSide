@@ -19,6 +19,8 @@ import ManageStories from '../DashboardComponent/TouristComponent/ManageStories/
 import EditStory from '../DashboardComponent/TouristComponent/ManageStories/EditStory';
 import AllStory from '../Pages/AllStory/AllStory';
 import MyAssignedTours from '../DashboardComponent/GuideComponent/MyAssignedTour';
+import AddPackage from '../DashboardComponent/AdminComponent/AddPackage';
+import ManageUsers from '../DashboardComponent/AdminComponent/ManageUsers';
 
 const router = createBrowserRouter([
     {
@@ -96,6 +98,14 @@ const router = createBrowserRouter([
             {
                 path: 'add-Story',
                 Component: Add_Story,
+            },
+            {
+                path: 'add-package',
+                Component: AddPackage
+            },
+            {
+                path: 'manage-users',
+                Component: ManageUsers,
             }
         ]
     }
