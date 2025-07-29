@@ -3,12 +3,12 @@ import useAuth from './useAuth';
 import useAxiosSecure from './useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 
-const useUserRole = () => {
+const useGuideRole = () => {
     const {user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
 
 
-    const { data: role = 'traveller', isLoading: roleLoading, refetch } = useQuery({
+    const { data: role = 'guide', isLoading: roleLoading, refetch } = useQuery({
         queryKey: ['userRole', user?.email],
         enabled: !loading && !!user?.email,
 
@@ -21,4 +21,4 @@ const useUserRole = () => {
     return {role, roleLoading: loading || roleLoading, refetch}
 };
 
-export default useUserRole;
+export default useGuideRole;

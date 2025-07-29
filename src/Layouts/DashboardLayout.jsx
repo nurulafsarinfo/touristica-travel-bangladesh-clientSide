@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router';
-import useUserRole from '../Hooks/useUserRole';
+import useUserRole from '../Hooks/useGuideRole';
 import useAuth from '../Hooks/useAuth';
 
 const DashboardLayout = () => {
@@ -37,10 +37,11 @@ const DashboardLayout = () => {
                         Touristica
                     </div>
                 </NavLink>
-                
-                <NavLink
-                    to=""
-                >
+
+
+                <NavLink to="" >
+                    {/*  to='' is empty for default dashboard data showing */}
+
                     <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-4">
                         <img
                             src={user?.photoURL}
@@ -64,13 +65,27 @@ const DashboardLayout = () => {
                         Profile
                     </NavLink>
 
-                    <NavLink to={`/dashboard/bookings/${user.email}`} className={({ isActive }) =>
-                        `block px-4 py-2 rounded transition-colors duration-200 ${isActive
-                            ? 'bg-[#0ea5e9]/20 font-semibold'
-                            : 'hover:bg-[#0ea5e9]/30'}`
-                    }>
-                        My Bookings
-                    </NavLink>
+
+
+                    {
+                        role === 'guide' ?
+                            <NavLink to={`/dashboard/assigned-tours/${user.email}`} className={({ isActive }) =>
+                                `block px-4 py-2 rounded transition-colors duration-200 ${isActive
+                                    ? 'bg-[#0ea5e9]/20 font-semibold'
+                                    : 'hover:bg-[#0ea5e9]/30'}`
+                            }>
+                                My Assigned Tours
+                            </NavLink> :
+                            <NavLink to={`/dashboard/bookings/${user.email}`} className={({ isActive }) =>
+                                `block px-4 py-2 rounded transition-colors duration-200 ${isActive
+                                    ? 'bg-[#0ea5e9]/20 font-semibold'
+                                    : 'hover:bg-[#0ea5e9]/30'}`
+                            }>
+                                My Bookings
+                            </NavLink>
+                    }
+
+
 
                     <NavLink to="/dashboard/manage-stories" className={({ isActive }) =>
                         `block px-4 py-2 rounded transition-colors duration-200 ${isActive
@@ -89,6 +104,15 @@ const DashboardLayout = () => {
                     </NavLink>
                 </nav>
             </aside>
+
+
+
+
+
+
+
+
+
 
             {/* Main Content */}
             <main className="flex-1 p-4 md:p-8">

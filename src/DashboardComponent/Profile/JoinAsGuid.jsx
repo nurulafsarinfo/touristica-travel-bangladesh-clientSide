@@ -22,9 +22,8 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
     const updatedUserMutation = useMutation({
         mutationFn: async (formData) => {
             const res = await axiosSecure.post('/beGuideRequest',
-                { ...formData, name: user?.displayName, email: user?.email, photoURL: user?.photoURL }
+                { ...formData, name: user?.displayName, guideEmail: user?.email, photoURL: user?.photoURL }
             );
-            console.log('res save db data', res)
             return res.data;
         },
         onSuccess: () => {
@@ -58,7 +57,7 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
             );
 
             setIsSuccessOpen(true);
-            setFormData({ title: '', reason: '', cvLink: '' });
+            setFormData({ title: '', reason: '', cvLink: '', experience: '' });
 
         } catch (err) {
             console.error('Application failed:', err);

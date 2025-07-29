@@ -14,6 +14,7 @@ const PackageDetails = () => {
     const axiosSecure = useAxiosSecure();
     const [shuffledImages, setShuffledImages] = useState([]);
     const navigate = useNavigate();
+
     const { register, handleSubmit, control, formState: { errors } } = useForm();
 
     const { data: packages = [], isLoading } = useQuery({
@@ -95,6 +96,12 @@ const PackageDetails = () => {
             return;
         }
 
+        const selectedGuideName = data.tourGuide;
+        const selectedGuide = guides.find(guide => guide.name === selectedGuideName);
+
+        const toureGuideEmail = selectedGuide.email;
+
+
         Swal.fire({
             title: 'Are you sure?',
             text: 'Do you want to confirm this booking?',
@@ -111,11 +118,13 @@ const PackageDetails = () => {
                     name: user?.displayName,
                     email: user?.email,
                     packageName: packages.title,
+                    toureGuideEmail: toureGuideEmail,
                     price: packages.price,
                     touristImage: user?.photoURL,
                     created_at: new Date().toISOString(),
                     status: 'pending',
                 };
+                console.log('booking data is ', bookingData)
                 mutate(bookingData);
             }
 
@@ -291,7 +300,8 @@ const PackageDetails = () => {
                                             <option value="">-- Select a guide --</option>
                                             {
                                                 guides.map((guide) => (
-                                                    <option key={guide._id} value={guide.name}>
+                                                    <option key={guide._id} 
+                                                    value={guide.name}>
                                                         {guide.name}
                                                     </option>
                                                 ))

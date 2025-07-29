@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
-import useUserRole from '../../Hooks/useUserRole';
+import useUserRole from '../../Hooks/useGuideRole';
 import { Link } from 'react-router';
 import EditProfileModal from './EditProfileModal';
 import toast from 'react-hot-toast';
@@ -8,15 +8,34 @@ import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast'
 import JoinGuideModal from './JoinAsGuid';
 
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
+
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
     console.log('data updated', user);
     const { role, roleLoading } = useUserRole();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // eslint-disable-next-line no-unused-vars
-    const [ updatedName, setUpdatedName ] = useState('');
+    const [updatedName, setUpdatedName] = useState('');
     const [isJoinGuidModalOpen, setIsJoinGuideModalOpen] = useState(false);
+
+
+
+
+    const axiosSecure = useAxiosSecure();
+
+    const { data: stats = {}, isLoading: statsLoading } = useQuery({
+        queryKey: ['adminStats'],
+        enabled: role === 'admin',
+        queryFn: async () => {
+            const res = await axiosSecure.get('/admin/stats');
+            return res.data;
+        },
+    });
+
+    console.log(stats)
 
 
     const handleSave = (updatedData) => {
@@ -63,10 +82,12 @@ const Profile = () => {
                         <button onClick={() => setIsModalOpen(true)} className="px-4 py-2 bg-[#0ea5e9] hover:bg-[#0ea5e9]/90 text-white rounded-xl shadow font-semibold transition duration-200">
                             Edit Profile
                         </button>
-
-                        <button onClick={() => setIsJoinGuideModalOpen(true)} className="px-4 py-2 bg-[#f050a6] hover:bg-[#f050a6]/90 text-white rounded-xl shadow font-semibold transition duration-200">
-                            Join as Tour Guide
-                        </button>
+                        {
+                            role === 'guide' || role === 'admin' ? '' :
+                                <button onClick={() => setIsJoinGuideModalOpen(true)} className="px-4 py-2 bg-[#f050a6] hover:bg-[#f050a6]/90 text-white rounded-xl shadow font-semibold transition duration-200">
+                                    Join as Tour Guide
+                                </button>
+                        }
                     </div>
 
                     {/* Edit profil modal  */}
@@ -94,6 +115,32 @@ const Profile = () => {
 
                 </div>
             </div>
+
+            {role === 'admin' && (
+                <div className="mt-8 bg-[#f9f9f9] p-6 rounded-lg shadow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
+                    <div className="bg-white rounded-xl p-4 shadow-md border">
+                        <h4 className="text-lg font-semibold text-[#263a88]">Total Payments</h4>
+                        <p className="text-xl font-bold text-green-600">{stats.totalPayments} ৳</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md border">
+                        <h4 className="text-lg font-semibold text-[#263a88]">Total Tour Guides</h4>
+                        <p className="text-xl font-bold">{stats.totalGuides}</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md border">
+                        <h4 className="text-lg font-semibold text-[#263a88]">Total Clients</h4>
+                        <p className="text-xl font-bold">{stats.totalClients}</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md border">
+                        <h4 className="text-lg font-semibold text-[#263a88]">Total Packages</h4>
+                        <p className="text-xl font-bold">{stats.totalPackages}</p>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md border col-span-1 sm:col-span-2 lg:col-span-1">
+                        <h4 className="text-lg font-semibold text-[#263a88]">Total Stories</h4>
+                        <p className="text-xl font-bold">{stats.totalStories}</p>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
