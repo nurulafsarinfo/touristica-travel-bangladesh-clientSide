@@ -32,7 +32,6 @@ const MyBookings = () => {
   });
 
   const handleCancel = (id) => {
-    console.log('cancel button triggerd')
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you really want to cancel this booking?',

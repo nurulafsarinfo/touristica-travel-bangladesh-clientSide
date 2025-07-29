@@ -19,7 +19,6 @@ const TouristStorySection = () => {
         },
     });
 
-    console.log('story data', stories);
 
     const handleShareClick = () => {
         if (!user) {

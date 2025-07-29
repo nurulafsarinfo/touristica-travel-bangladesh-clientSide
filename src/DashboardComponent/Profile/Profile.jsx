@@ -15,7 +15,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
-    console.log('data updated', user);
+    // console.log('data updated', user);
     const { role, roleLoading } = useUserRole();
     const [isModalOpen, setIsModalOpen] = useState(false);
     // eslint-disable-next-line no-unused-vars
@@ -36,7 +36,7 @@ const Profile = () => {
         },
     });
 
-    console.log(stats)
+    // console.log(stats)
 
 
     const handleSave = (updatedData) => {
@@ -44,7 +44,7 @@ const Profile = () => {
         updateUserProfile(updatedData)
             .then(async () => {
                 setUpdatedName(updatedData);
-                console.log('profile updaaaaaat', updatedData)
+                // console.log('profile updaaaaaat', updatedData)
                 toast.success('✅ Profile updated!');
             })
             .catch((error) => {

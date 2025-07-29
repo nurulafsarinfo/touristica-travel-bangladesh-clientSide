@@ -18,7 +18,7 @@ const Login = () => {
 
     try {
       signIn(email, password).then((result) => {
-        console.log("User signed in", result.user);
+        // console.log("User signed in", result.user);
         navigate(from, { replace: true });
       });
     } catch (err) {

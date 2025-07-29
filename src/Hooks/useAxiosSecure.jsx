@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://touristica-server-side.vercel.app',
     withCredentials: true,
 })
 
@@ -28,7 +28,7 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.response.use(res => {
         return res;
     }), error => {
-        console.log('inside res interceptor', error.status);
+        // console.log('inside res interceptor', error.status);
         const status = error.response?.status;
         if (status === 403) {
             navigate('/forbidden')

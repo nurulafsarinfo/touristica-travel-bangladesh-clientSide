@@ -19,7 +19,6 @@ const MyAssignedTours = () => {
         }
     });
 
-    console.log('assign tours', assignedTours);
 
 
     const { mutate: updateStatus } = useMutation({

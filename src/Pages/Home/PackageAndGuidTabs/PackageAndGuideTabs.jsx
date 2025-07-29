@@ -16,7 +16,7 @@ const TourismSection = () => {
             try {
                 const res = await axiosSecure.get('/packages/random');
 
-                console.log('packages data', res.data);
+                // console.log('packages data', res.data);
 
                 return res.data;
             } catch (err) {

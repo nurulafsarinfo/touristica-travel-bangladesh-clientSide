@@ -8,7 +8,6 @@ import useAxios from '../../Hooks/useAxios';
 
 const GuideProfile = () => {
   const { id } = useParams(); 
-  console.log('guid id is', id)
   const axiosSecure = useAxios();
 
  

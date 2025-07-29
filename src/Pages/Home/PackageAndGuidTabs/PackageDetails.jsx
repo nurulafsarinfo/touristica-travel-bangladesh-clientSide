@@ -124,7 +124,7 @@ const PackageDetails = () => {
                     created_at: new Date().toISOString(),
                     status: 'pending',
                 };
-                console.log('booking data is ', bookingData)
+                // console.log('booking data is ', bookingData)
                 mutate(bookingData);
             }
 

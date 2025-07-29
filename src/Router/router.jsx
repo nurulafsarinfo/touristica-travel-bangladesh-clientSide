@@ -21,6 +21,7 @@ import AllStory from '../Pages/AllStory/AllStory';
 import MyAssignedTours from '../DashboardComponent/GuideComponent/MyAssignedTour';
 import AddPackage from '../DashboardComponent/AdminComponent/AddPackage';
 import ManageUsers from '../DashboardComponent/AdminComponent/ManageUsers';
+import ManageCandidates from '../DashboardComponent/AdminComponent/ManageCandidates';
 
 const router = createBrowserRouter([
     {
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
             {
                 path: 'manage-users',
                 Component: ManageUsers,
+            },
+            {
+                path: 'manage-candidates',
+                Component: ManageCandidates,
             }
         ]
     }

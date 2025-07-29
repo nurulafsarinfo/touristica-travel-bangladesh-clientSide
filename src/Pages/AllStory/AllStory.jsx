@@ -19,7 +19,7 @@ const AllStory = () => {
         },
     });
 
-    console.log('story data', stories);
+    // console.log('story data', stories);
 
     const handleShareClick = () => {
         if (!user) {
