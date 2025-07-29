@@ -7,9 +7,9 @@ const ManageCandidates = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
 
+    const itemsPerPage = 10;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
 
     // Fetch all guide applications
     const { data, isLoading, } = useQuery({
@@ -25,13 +25,12 @@ const ManageCandidates = () => {
         }
     });
 
-    // console.log('data is candidate', data);
 
-    const applications = data || [];
-    const totalCount = data?.totalCount || 0;
+    const applications = data?.applications || [];
+    const totalCount = data?.totalcount || 0;
     const totalPages = Math.ceil(totalCount / itemsPerPage);
 
-    // console.log("manageCandidates data ", applications)
+
 
     // Mutation for accepting an application
     const { mutate: acceptApplication } = useMutation({
@@ -160,6 +159,7 @@ const ManageCandidates = () => {
                             className={`btn btn-sm ${currentPage === pageNumber + 1 ? 'btn-primary' : ''}`}
                         >
                             {pageNumber + 1}
+
                         </button>
                     ))}
 

@@ -27,8 +27,8 @@ const TouristStorySection = () => {
     };
 
     return (
-        <section className="bg-gray-50 py-12 px-4">
-            <div className="container mx-auto">
+        <section className="bg-gray-50 py-12 px-4 ">
+            <div className="container w-11/12 mx-auto">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-bold text-gray-800">Tourist Stories</h2>
                     <p className="text-gray-500 mt-2">Discover amazing adventures from fellow travelers.</p>
