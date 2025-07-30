@@ -4,26 +4,36 @@ import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-    baseURL: 'https://touristica-server-side.vercel.app',
-    // baseURL: 'http://localhost:5000',
+    // baseURL: 'https://touristica-server-side.vercel.app',
+    baseURL: 'http://localhost:5000',
     withCredentials: true,
 })
 
 
 const useAxiosSecure = () => {
-    const { user, logOut } = useAuth();
+    const { logOut } = useAuth();
     const navigate = useNavigate();
 
-    axiosSecure.interceptors.request.use(
-        config => {
-            const token = user?.accessToken;
-            if (token) {
-                config.headers.Authorization = `Bearer ${token}`;
-            }
-            return config;
-        }, error => {
-            return Promise.reject(error);
-        })
+    // axiosSecure.interceptors.request.use(
+    //     config => {
+    //         const token = user?.accessToken;
+    //         if (token) {
+    //             config.headers.Authorization = `Bearer ${token}`;
+    //         }
+    //         return config;
+    //     }, error => {
+    //         return Promise.reject(error);
+    //     })
+
+    axiosSecure.interceptors.request.use( (config) => {
+        const token = localStorage.getItem('access-token');
+        config.headers.authorization = `Bearer ${token}`;
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+
+
 
 
     axiosSecure.interceptors.response.use(res => {
@@ -41,9 +51,6 @@ const useAxiosSecure = () => {
                 })
                 .catch(() => { })
         }
-
-
-
         return Promise.reject(error);
     }
 

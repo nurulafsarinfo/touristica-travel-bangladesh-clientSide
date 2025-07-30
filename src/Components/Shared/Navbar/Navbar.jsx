@@ -3,11 +3,13 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import { NavLink } from "react-router"; // use react-router-dom for web routing
 import { FaUserCircle } from "react-icons/fa";
 import useAuth from "../../../Hooks/useAuth";
+import logoImage from '/Simple Wordmark Logo for Touristica.png'
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
 
     const navLinks = (
         <>
@@ -62,8 +64,8 @@ const Navbar = () => {
     };
 
     return (
-        <div>
-            <div className="navbar bg-base-100 shadow-sm font-signikaText px-4 md:px-10">
+        <div className="sticky top-0 z-50  ">
+            <div className="navbar  shadow-sm font-signikaText bg-teal-300 backdrop-blur-2xl px-4 md:px-10">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label
@@ -98,7 +100,10 @@ const Navbar = () => {
                         to="/"
                         className="btn btn-ghost text-xl font-logoText tracking-widest"
                     >
-                        Touristica
+                        <div className="flex gap-2 items-center">
+                            <img src={logoImage} alt="touristica logo" className="w-16 h-12 rounded-2xl"/>
+                        <p className="text-bold text-2xl">Touristica</p>
+                        </div>
                     </NavLink>
                 </div>
 

@@ -1,15 +1,18 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { NavLink } from "react-router";
+import logoImage from '/Simple Wordmark Logo for Touristica.png';
+
 
 const Footer = () => {
+    
     return (
-        <footer className="bg-base-200 text-base-content py-10 px-5 md:px-20">
+        <footer className="bg-teal-100 text-base-content py-10 px-5 md:px-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
                 {/* Logo & Site Name */}
                 <div className="flex flex-col font-logoText items-center md:items-start space-y-3">
                     <img
-                        src=""
+                        src={logoImage}
                         alt="Touristica Logo"
                         className="w-12 h-12 object-contain bg-teal-200 rounded-full"
                     />

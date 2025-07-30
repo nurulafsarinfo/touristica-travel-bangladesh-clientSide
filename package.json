@@ -18,7 +18,7 @@
     "axios": "^1.10.0",
     "daisyui": "^5.0.46",
     "firebase": "^11.10.0",
-    "framer-motion": "^12.23.5",
+    "framer-motion": "^12.23.12",
     "react": "^19.1.0",
     "react-confetti": "^6.4.0",
     "react-datepicker": "^8.4.0",
@@ -31,6 +31,7 @@
     "react-share": "^5.2.2",
     "react-tabs": "^6.1.0",
     "sweetalert2": "^11.22.2",
+    "swiper": "^11.2.10",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

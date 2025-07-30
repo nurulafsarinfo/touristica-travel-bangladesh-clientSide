@@ -22,6 +22,7 @@ import MyAssignedTours from '../DashboardComponent/GuideComponent/MyAssignedTour
 import AddPackage from '../DashboardComponent/AdminComponent/AddPackage';
 import ManageUsers from '../DashboardComponent/AdminComponent/ManageUsers';
 import ManageCandidates from '../DashboardComponent/AdminComponent/ManageCandidates';
+import AdminRoute from '../Routes/AdminRoute';
 
 const router = createBrowserRouter([
     {
@@ -91,6 +92,7 @@ const router = createBrowserRouter([
             {
                 path: 'assigned-tours/:email',
                 Component: MyAssignedTours,
+                
             },
             {
                 path: 'edit-story/:id',
@@ -102,15 +104,16 @@ const router = createBrowserRouter([
             },
             {
                 path: 'add-package',
-                Component: AddPackage
+                element: <AdminRoute><AddPackage/></AdminRoute>
             },
             {
                 path: 'manage-users',
-                Component: ManageUsers,
+                element: <AdminRoute><ManageUsers/></AdminRoute>,
             },
             {
                 path: 'manage-candidates',
                 Component: ManageCandidates,
+                element: <AdminRoute><ManageCandidates/></AdminRoute>
             }
         ]
     }

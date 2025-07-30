@@ -1,5 +1,5 @@
 import React from 'react';
-import Bannner from '../Pages/Home/Banner/Bannner';
+import Bannner from '../Pages/Home/Banner/Banner';
 import PackageAndGuideTabs from '../Pages/Home/PackageAndGuidTabs/PackageAndGuideTabs';
 import Story from '../Pages/Home/Story/Story';
 

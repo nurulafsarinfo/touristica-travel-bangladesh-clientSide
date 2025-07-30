@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
-import useUserRole from '../../Hooks/useGuideRole';
+import useUserRole from '../../Hooks/useUserRole';
 import { Link } from 'react-router';
 import EditProfileModal from './EditProfileModal';
 import toast from 'react-hot-toast';

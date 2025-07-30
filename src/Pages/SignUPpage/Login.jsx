@@ -3,9 +3,11 @@ import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import loginImg from "../../assets/Undraw Traveling.svg"; // যে ইমেজ রেজিস্ট্রেশনে ইউজ করেছো
 import SocialLogin from "./SocialLogin";
+import useAxios from "../../Hooks/useAxios";
 
 const Login = () => {
   const { signIn } = useAuth();
+  const axiosPublic = useAxios();
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,9 +18,22 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+
+
+    axiosPublic.post('/jwt', {email: email})
+      .then(res => {
+        if(res.data.token) {
+          localStorage.setItem('access-token', res.data.token);
+          navigate(from, { replace: true });
+        };
+      });
+
+
+
+
     try {
       signIn(email, password).then((result) => {
-        // console.log("User signed in", result.user);
+        console.log("User signed in", result.user);
         navigate(from, { replace: true });
       });
     } catch (err) {

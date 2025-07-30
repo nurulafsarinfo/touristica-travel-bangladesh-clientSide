@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import {
+    FaBars,
+    FaTimes,
+    FaUserCircle,
+    FaPlusSquare,
+    FaUsersCog,
+    FaUserCheck,
+    FaClipboardList,
+    FaBookmark,
+    FaFolderOpen,
+    FaPenFancy
+} from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router';
-import useUserRole from '../Hooks/useGuideRole';
+import useUserRole from '../Hooks/useUserRole';
 import useAuth from '../Hooks/useAuth';
 
 const DashboardLayout = () => {
@@ -21,6 +32,7 @@ const DashboardLayout = () => {
                 >
                     {sidebarOpen ? (
                         <FaTimes className="w-6 h-6 text-[#263a88]" />
+
                     ) : (
                         <FaBars className="w-6 h-6 text-[#263a88]" />
                     )}
@@ -38,10 +50,7 @@ const DashboardLayout = () => {
                     </div>
                 </NavLink>
 
-
-                <NavLink to="" >
-                    {/*  to='' is empty for default dashboard data showing */}
-
+                <NavLink to="">
                     <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-4">
                         <img
                             src={user?.photoURL}
@@ -56,101 +65,80 @@ const DashboardLayout = () => {
                 </NavLink>
 
                 <nav className="p-4 space-y-2 font-raleway text-[1rem]">
-
                     <NavLink to="/dashboard/profile" className={({ isActive }) =>
-                        `block px-4 py-2 rounded transition-colors duration-200 ${isActive
+                        `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
                             : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Profile
+                        <FaUserCircle /> Profile
                     </NavLink>
 
-                    {
-                        role === 'admin' &&
+                    {role === 'admin' && (
+                        <>
                             <NavLink to="/dashboard/add-package" className={({ isActive }) =>
-                            `block px-4 py-2 rounded transition-colors duration-200 ${isActive
-                                ? 'bg-[#0ea5e9]/20 font-semibold'
-                                : 'hover:bg-[#0ea5e9]/30'}`
-                        }>
-                            Add Packages
-                        </NavLink>
-                    }
-
-                    {
-                        role === 'admin' &&
-                            <NavLink to="/dashboard/manage-users" className={({ isActive }) =>
-                            `block px-4 py-2 rounded transition-colors duration-200 ${isActive
-                                ? 'bg-[#0ea5e9]/20 font-semibold'
-                                : 'hover:bg-[#0ea5e9]/30'}`
-                        }>
-                            Manage Users
-                        </NavLink>
-                    }
-
-                    {
-                        role === 'admin' &&
-                            <NavLink to="/dashboard/manage-candidates" className={({ isActive }) =>
-                            `block px-4 py-2 rounded transition-colors duration-200 ${isActive
-                                ? 'bg-[#0ea5e9]/20 font-semibold'
-                                : 'hover:bg-[#0ea5e9]/30'}`
-                        }>
-                            Manage Candidates
-                        </NavLink>
-                    }
-
-
-
-                    {
-                        role === 'guide' || role !== 'admin' ?
-                            <NavLink to={`/dashboard/assigned-tours/${user.email}`} className={({ isActive }) =>
-                                `block px-4 py-2 rounded transition-colors duration-200 ${isActive
+                                ` px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
                                     ? 'bg-[#0ea5e9]/20 font-semibold'
                                     : 'hover:bg-[#0ea5e9]/30'}`
                             }>
-                                My Assigned Tours
-                            </NavLink> :
-                            <NavLink to={`/dashboard/bookings/${user.email}`} className={({ isActive }) =>
-                                `block px-4 py-2 rounded transition-colors duration-200 ${isActive
-                                    ? 'bg-[#0ea5e9]/20 font-semibold'
-                                    : 'hover:bg-[#0ea5e9]/30'}`
-                            }>
-                                My Bookings
+                                <FaPlusSquare /> Add Packages
                             </NavLink>
-                    }
 
+                            <NavLink to="/dashboard/manage-users" className={({ isActive }) =>
+                                `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
+                                    ? 'bg-[#0ea5e9]/20 font-semibold'
+                                    : 'hover:bg-[#0ea5e9]/30'}`
+                            }>
+                                <FaUsersCog /> Manage Users
+                            </NavLink>
 
+                            <NavLink to="/dashboard/manage-candidates" className={({ isActive }) =>
+                                `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
+                                    ? 'bg-[#0ea5e9]/20 font-semibold'
+                                    : 'hover:bg-[#0ea5e9]/30'}`
+                            }>
+                                <FaUserCheck /> Manage Candidates
+                            </NavLink>
+                        </>
+                    )}
+
+                    {role === 'guide' || role !== 'admin' ? (
+                        <NavLink to={`/dashboard/assigned-tours/${user.email}`} className={({ isActive }) =>
+                            `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
+                                ? 'bg-[#0ea5e9]/20 font-semibold'
+                                : 'hover:bg-[#0ea5e9]/30'}`
+                        }>
+                            <FaClipboardList /> My Assigned Tours
+                        </NavLink>
+                    ) : (
+                        <NavLink to={`/dashboard/bookings/${user.email}`} className={({ isActive }) =>
+                            `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
+                                ? 'bg-[#0ea5e9]/20 font-semibold'
+                                : 'hover:bg-[#0ea5e9]/30'}`
+                        }>
+                            <FaBookmark /> My Bookings
+                        </NavLink>
+                    )}
 
                     <NavLink to="/dashboard/manage-stories" className={({ isActive }) =>
-                        `block px-4 py-2 rounded transition-colors duration-200 ${isActive
+                        `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
                             : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Manage Stories
+                        <FaFolderOpen /> Manage Stories
                     </NavLink>
 
                     <NavLink to="/dashboard/add-Story" className={({ isActive }) =>
-                        `block px-4 py-2 rounded transition-colors duration-200 ${isActive
+                        `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
                             ? 'bg-[#0ea5e9]/20 font-semibold'
                             : 'hover:bg-[#0ea5e9]/30'}`
                     }>
-                        Add Stories
+                        <FaPenFancy /> Add Stories
                     </NavLink>
                 </nav>
             </aside>
 
-
-
-
-
-
-
-
-
-
             {/* Main Content */}
             <main className="flex-1 p-4 md:p-8">
-
-                {/* Dynamic Page Outlet */}
                 <Outlet />
             </main>
         </div>
