@@ -101,7 +101,7 @@ const DashboardLayout = () => {
                         </>
                     )}
 
-                    {role === 'guide' || role !== 'admin' ? (
+                    {role === 'guide' & role !== 'admin'  ? (
                         <NavLink to={`/dashboard/assigned-tours/${user.email}`} className={({ isActive }) =>
                             `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive
                                 ? 'bg-[#0ea5e9]/20 font-semibold'
@@ -109,6 +109,7 @@ const DashboardLayout = () => {
                         }>
                             <FaClipboardList /> My Assigned Tours
                         </NavLink>
+          
                     ) : (
                         <NavLink to={`/dashboard/bookings/${user.email}`} className={({ isActive }) =>
                             `px-4 py-2 rounded transition-colors duration-200 flex items-center gap-2 ${isActive

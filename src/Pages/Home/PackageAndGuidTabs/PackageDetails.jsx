@@ -42,6 +42,9 @@ const PackageDetails = () => {
     })
 
 
+    console.log('guide data from package details', guides)
+
+
     // for shuffle img
     useEffect(() => {
         if (packages?.images?.length > 0) {

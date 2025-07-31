@@ -29,7 +29,7 @@ const ManageUsers = () => {
 
     const roleOptions = [
         { value: 'all', label: 'All Roles' },
-        { value: 'tourist', label: 'Tourist' },
+        { value: 'traveller', label: 'traveller' },
         { value: 'guide', label: 'Guide' },
         { value: 'admin', label: 'Admin' },
     ];

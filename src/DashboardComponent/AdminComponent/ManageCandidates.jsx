@@ -71,7 +71,7 @@ const ManageCandidates = () => {
             confirmButtonText: 'Yes, accept!'
         }).then((result) => {
             if (result.isConfirmed) {
-                acceptApplication({ applicationId: application._id, applicantEmail: application.email });
+                acceptApplication({ applicationId: application._id, applicantEmail: application.guideEmail });
             }
         });
     };
@@ -120,7 +120,7 @@ const ManageCandidates = () => {
                                     <tr key={app._id} className="hover">
                                         <th>{(currentPage - 1) * itemsPerPage + index + 1}</th>
                                         <td>{app.name}</td>
-                                        <td>{app.email}</td>
+                                        <td>{app.guideEmail}</td>
                                         <td className="max-w-xs truncate" title={app.reason}>{app.reason}</td>
                                         <td>
                                             <a href={app.cvLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
