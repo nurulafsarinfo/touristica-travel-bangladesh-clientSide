@@ -4,9 +4,9 @@ import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-    // baseURL: 'https://touristica-server-side.vercel.app',
-    baseURL: 'http://localhost:5000',
-    withCredentials: true,
+    baseURL: 'https://touristica-server-side.vercel.app',
+    // baseURL: 'http://localhost:5000',
+    // withCredentials: true,
 })
 
 
