@@ -25,7 +25,7 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
-                    to="/community"
+                    to="/all-stories"
                     className={({ isActive }) =>
                         isActive ? "font-semibold text-indigo-600" : "font-signikaText"
                     }
@@ -35,7 +35,7 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
-                    to="/about"
+                    to="/about-us"
                     className={({ isActive }) =>
                         isActive ? "font-semibold text-indigo-600" : "font-signikaText"
                     }

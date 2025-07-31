@@ -17,12 +17,13 @@ import Payment from '../DashboardComponent/TouristComponent/Payment/Payment';
 import Add_Story from '../DashboardComponent/TouristComponent/Add_Story';
 import ManageStories from '../DashboardComponent/TouristComponent/ManageStories/ManageStories';
 import EditStory from '../DashboardComponent/TouristComponent/ManageStories/EditStory';
-import AllStory from '../Pages/AllStory/AllStory';
 import MyAssignedTours from '../DashboardComponent/GuideComponent/MyAssignedTour';
 import AddPackage from '../DashboardComponent/AdminComponent/AddPackage';
 import ManageUsers from '../DashboardComponent/AdminComponent/ManageUsers';
 import ManageCandidates from '../DashboardComponent/AdminComponent/ManageCandidates';
 import AdminRoute from '../Routes/AdminRoute';
+import Community from '../Pages/Community/Community';
+import AboutUs from '../Pages/About Us/AboutUs';
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
             {
                 path: '/packages/:id',
                 Component: PackageDetails,
+                element: <PrivateRoute><PackageDetails/></PrivateRoute>
             },
             {
                 path: '/all-trips',
@@ -43,11 +45,15 @@ const router = createBrowserRouter([
             },
             {
                 path: '/all-stories',
-                Component: AllStory,
+                Component: Community,
+            },
+            {
+                path: '/about-us',
+                Component: AboutUs,
             },
             {
                 path: '/guides/:id',
-                Component: GuideProfile,
+                element: <PrivateRoute><GuideProfile/></PrivateRoute>
             },
             {
                 path: '/register',

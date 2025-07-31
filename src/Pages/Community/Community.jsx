@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router';
 import useAxios from '../../Hooks/useAxios';
 import useAuth from '../../Hooks/useAuth';
 
-const AllStory = () => {
+const Community = () => {
     const axiosSecure = useAxios();
     const { user } = useAuth();
     const navigate = useNavigate();
@@ -81,4 +81,4 @@ const AllStory = () => {
 
 };
 
-export default AllStory;
+export default Community;
