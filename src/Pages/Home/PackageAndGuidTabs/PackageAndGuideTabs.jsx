@@ -57,14 +57,17 @@ const TourismSection = () => {
                         </p>
                     </div>
                     <div className="md:w-1/2">
-                        <iframe
-                            className="w-full h-64 md:h-80 rounded-xl shadow-lg"
-                            src="https://www.youtube.com/embed/tgbNymZ7vqY"
-                            title="Touristica Overview"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
+
+                        <video
+                            className='w-full h-64 md:h-80 rounded-xl shadow-lg'
+                            src='/video/Project Overview.mp4'
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        >
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>

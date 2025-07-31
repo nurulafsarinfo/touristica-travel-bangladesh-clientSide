@@ -24,6 +24,7 @@ import ManageCandidates from '../DashboardComponent/AdminComponent/ManageCandida
 import AdminRoute from '../Routes/AdminRoute';
 import Community from '../Pages/Community/Community';
 import AboutUs from '../Pages/About Us/AboutUs';
+import GuideRoute from '../Routes/GuideRoute';
 
 const router = createBrowserRouter([
     {
@@ -97,7 +98,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'assigned-tours/:email',
-                Component: MyAssignedTours,
+                element: <GuideRoute><MyAssignedTours/></GuideRoute>
                 
             },
             {
