@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
-import travelImg from '../../assets/Undraw Traveling.svg'; 
+import travelImg from '../../assets/Undraw Traveling.svg';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../Hooks/useAuth';
 import useAxios from '../../Hooks/useAxios';
@@ -8,9 +8,9 @@ import axios from 'axios';
 import SocialLogin from './SocialLogin';
 
 const Register = () => {
-    const { register, formState: {errors} , handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUserProfile } = useAuth();
-    const [ profilePic, setProfilePic ] = useState('');
+    const [profilePic, setProfilePic] = useState('');
     const axiosInstance = useAxios();
     const location = useLocation();
     const navigate = useNavigate();
@@ -33,6 +33,14 @@ const Register = () => {
 
                 console.log(userRes.data);
 
+                axiosInstance.post('/jwt', { email: data.email })
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            navigate(from, { replace: true });
+                        };
+                    });
+
 
                 //Update user profile in firebase
                 const userProfile = {
@@ -43,10 +51,10 @@ const Register = () => {
                     .then(() => {
                         console.log(`profile name pic updated`);
                     })
-                    .catch (err =>  {
+                    .catch(err => {
                         console.log(err);
                     })
-                    
+
                 navigate(from)
             })
             .catch(error => {
@@ -78,17 +86,17 @@ const Register = () => {
                 </div>
 
                 {/* Form */}
-                <div className={`w-full`}> 
+                <div className={`w-full`}>
                     <h2 className="text-3xl font-bold text-[#0ea5e9] mb-2">Join Touristica</h2>
                     <p className="mb-6 text-secondary">Plan your dream journey with us.</p>
-                    <form 
+                    <form
                         onSubmit={handleSubmit(onSubmit)}
                         className="space-y-4">
                         <div>
                             <label className="label">
                                 <span className="label-text">Full Name</span>
                             </label>
-                            <input type="text"  placeholder="Your name" {...register('name', {required: 'Name is required'})} className="input input-bordered w-full" />
+                            <input type="text" placeholder="Your name" {...register('name', { required: 'Name is required' })} className="input input-bordered w-full" />
 
                             {errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>}
                         </div>
@@ -97,8 +105,8 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="example@mail.com" {...register('email', {required: 'Email is required!'})}
-                            className="input input-bordered w-full" />
+                            <input type="email" placeholder="example@mail.com" {...register('email', { required: 'Email is required!' })}
+                                className="input input-bordered w-full" />
                             {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
                         </div>
 
@@ -110,7 +118,7 @@ const Register = () => {
                                 <span className="label-text">Profile Image URL</span>
                             </label>
 
-                            <input type='file' onChange={handleImageUpload} className='input input-bordered w-full p-2 text-gray-500'/>
+                            <input type='file' onChange={handleImageUpload} className='input input-bordered w-full p-2 text-gray-500' />
                         </div>
 
 
@@ -121,11 +129,12 @@ const Register = () => {
                                 <span className="label-text">Password</span>
                             </label>
 
-                            <input type="password" placeholder="••••••••" 
-                            {...register('password', {required: 'Password is required!', pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\w_]).{8,}$/, message: "Minium 8 chars, 1 uppercase, 1 lowercase, 1 number & 1 special char"}
-                            })} 
+                            <input type="password" placeholder="••••••••"
+                                {...register('password', {
+                                    required: 'Password is required!', pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\w_]).{8,}$/, message: "Minium 8 chars, 1 uppercase, 1 lowercase, 1 number & 1 special char" }
+                                })}
 
-                            className="input input-bordered w-full" />
+                                className="input input-bordered w-full" />
                             {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password.message}</p>}
 
                         </div>
@@ -138,7 +147,7 @@ const Register = () => {
                         </p>
                     </form>
                 </div>
-            <SocialLogin></SocialLogin>
+                <SocialLogin></SocialLogin>
             </div>
         </div>
     );
