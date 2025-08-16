@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import LoadingSpinner from '../../../Components/Shared/LoadingSpinner';
+import { Links } from 'react-router';
+import { NavLink } from 'react-router';
 
 const ManageStories = () => {
     const { user } = useAuth();
@@ -53,6 +55,15 @@ const ManageStories = () => {
     return (
         <div className="container mx-auto p-8">
             <h1 className="text-3xl font-bold mb-8">Manage Your Stories</h1>
+            {
+                stories.length === 0 && 
+                    <div className='flex flex-col items-center justify-center h-[70vh]'> 
+                        <p className='text-center text-xl mb-4'>You have no Story.</p> 
+                        <NavLink to={"/dashboard/add-Story"} className="px-4 py-2 bg-teal-400 rounded-md">
+                            Add Story    
+                        </NavLink>   
+                    </div>
+            }
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {stories.map(story => (
                     <div key={story._id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
