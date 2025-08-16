@@ -37,7 +37,6 @@ const router = createBrowserRouter([
             },
             {
                 path: '/packages/:id',
-                Component: PackageDetails,
                 element: <PrivateRoute><PackageDetails/></PrivateRoute>
             },
             {

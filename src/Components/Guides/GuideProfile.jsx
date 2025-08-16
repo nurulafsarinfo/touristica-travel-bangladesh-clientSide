@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router';
 import { FaUserCheck, FaBriefcase, FaCalendarAlt, FaFileAlt } from 'react-icons/fa';
 import useAxios from '../../Hooks/useAxios';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 
 
 
@@ -36,7 +37,7 @@ const GuideProfile = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen bg-base-100">
-        <div className="text-2xl font-signikaText text-[#263a88]">Loading Profile...</div>
+        <LoadingSpinner/>
       </div>
     );
   }

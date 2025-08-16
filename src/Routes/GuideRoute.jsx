@@ -2,13 +2,15 @@ import React from 'react';
 import useAuth from '../Hooks/useAuth';
 import { Navigate } from 'react-router';
 import useUserRole from '../Hooks/useUserRole';
+import LoadingSpinner from '../Components/Shared/LoadingSpinner';
 
 const GuideRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const { role, roleLoading } = useUserRole();
 
     if (loading || roleLoading) {
-        return <span className='loading loading-spinner loading-xl'></span>
+        // return <span className='loading loading-spinner loading-xl'></span>
+        return <LoadingSpinner/>
     }
 
     if (!user || role !== 'guide') {

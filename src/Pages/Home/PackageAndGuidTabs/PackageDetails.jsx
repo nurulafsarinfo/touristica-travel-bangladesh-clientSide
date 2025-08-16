@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
+import LoadingSpinner from '../../../Components/Shared/LoadingSpinner';
 
 const PackageDetails = () => {
     const { id } = useParams();
@@ -42,7 +43,10 @@ const PackageDetails = () => {
     })
 
 
-    console.log('guide data from package details', guides)
+
+    // console.log('passcksasge data from  details', packages)
+    // console.log('passcksasge data from  details')
+    // console.log('guide data from package details', guides)
 
 
     // for shuffle img
@@ -140,11 +144,10 @@ const PackageDetails = () => {
     return (
         <div className='max-w-11/12 mx-auto my-5 md:my-10 font-signikaText'>
             {
-                isLoading ? <p>Loading package details data...</p> :
+                isLoading ? <LoadingSpinner/>
+                :  
                     <div>
-
-                        <h2 className='text-xl md:text-2xl font-bold text-[#263a88] text-center'>Tour Packages Details</h2>
-
+                        <h2 className='text-xl md:text-2xl font-bold text-[#263a88] text-center'>Tour Packages Details</h2>     
                         <div className="max-w-11/12 mx-auto my-8 px-4">
                             <div className='text-center mb-6 '>
                                 <h2 className="text-2xl font-bold text-[#f050a6] m text-center">Tour Gallery</h2>

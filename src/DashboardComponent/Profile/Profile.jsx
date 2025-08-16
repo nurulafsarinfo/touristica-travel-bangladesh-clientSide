@@ -10,6 +10,7 @@ import JoinGuideModal from './JoinAsGuid';
 
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import LoadingSpinner from '../../Components/Shared/LoadingSpinner';
 
 
 
@@ -59,7 +60,7 @@ const Profile = () => {
     if (roleLoading) {
         return (
             <div className="flex justify-center items-center h-60">
-                <span className="loading loading-spinner text-primary"></span>
+                <LoadingSpinner/>
             </div>
         );
     }
@@ -118,7 +119,7 @@ const Profile = () => {
             </div>
 
             {
-                statsLoading && <p>States Loading...</p>
+                statsLoading && <LoadingSpinner/>
             }
             {role === 'admin' && (
                 <div className="mt-8 bg-[#f9f9f9] p-6 rounded-lg shadow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">

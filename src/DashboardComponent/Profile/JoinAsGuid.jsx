@@ -50,7 +50,7 @@ const JoinGuideModal = ({ isOpen, onRequestClose }) => {
             await toast.promise(
                 updatedUserMutation.mutateAsync(formData),
                 {
-                    // loading: 'Submitting application...',
+                    loading: 'Submitting application...',
                     success: '✅ Your Application Submitted!',
                     error: '❌ Failed to submit application',
                 }

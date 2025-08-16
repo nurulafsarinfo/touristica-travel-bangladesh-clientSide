@@ -42,7 +42,7 @@ const TourismSection = () => {
 
     console.log('tour guide are', guides)
 
-    if (isLoading) return <p>Loading...</p>
+    if (isLoading) return <p className='text-center'>Loading...</p>
 
 
     return (

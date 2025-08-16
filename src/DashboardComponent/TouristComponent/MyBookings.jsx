@@ -5,6 +5,7 @@ import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 import ReactConfetti from 'react-confetti';
+import LoadingSpinner from '../../Components/Shared/LoadingSpinner';
 
 
 
@@ -98,7 +99,7 @@ console.log('booking info count', bookingInfo)
     });
   };
 
-  if (isLoading) return <div className="text-center mt-10">Loading bookings...</div>;
+  if (isLoading) return <LoadingSpinner/>;
 
   return (
     <div className="max-w-7xl mx-auto p-4 font-signikaText">

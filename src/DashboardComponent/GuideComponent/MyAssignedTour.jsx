@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import LoadingSpinner from '../../Components/Shared/LoadingSpinner';
 
 const MyAssignedTours = () => {
     const { user } = useAuth();
@@ -51,7 +52,7 @@ const MyAssignedTours = () => {
         Swal.fire('Accepted!', 'The tour has been accepted.', 'success');
     };
 
-    if (isLoading) return <p>Loading your assigned tours...</p>;
+    if (isLoading) return <LoadingSpinner/>;
 
     return (
         <div className="p-8">

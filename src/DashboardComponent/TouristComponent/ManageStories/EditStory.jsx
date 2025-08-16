@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import axios from 'axios';
+import LoadingSpinner from '../../../Components/Shared/LoadingSpinner';
 
 const EditStory = () => {
     const { id } = useParams();
@@ -103,7 +104,7 @@ const EditStory = () => {
         updateStory(payload);
     };
 
-    if (isLoading) return <p className="text-center p-10">Loading story for editing...</p>;
+    if (isLoading) return <LoadingSpinner/>;
 
     return (
         <div className='p-4 sm:p-8'>

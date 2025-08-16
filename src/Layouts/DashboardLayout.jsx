@@ -14,13 +14,14 @@ import {
 import { Link, NavLink, Outlet } from 'react-router';
 import useUserRole from '../Hooks/useUserRole';
 import useAuth from '../Hooks/useAuth';
+import LoadingSpinner from '../Components/Shared/LoadingSpinner';
 
 const DashboardLayout = () => {
     const { user } = useAuth();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { role, roleLoading } = useUserRole();
 
-    if (roleLoading) return <p className="text-center mt-10 text-lg">Loading...</p>;
+    if (roleLoading) return <LoadingSpinner/>;
 
     return (
         <div className="min-h-screen flex font-signikaText text-[#263a88] bg-[#d1dbff]">

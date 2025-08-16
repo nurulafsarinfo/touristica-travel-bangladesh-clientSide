@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { FaDollarSign, FaStar, FaClock } from 'react-icons/fa';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 
 
 const AllPackages = () => {
@@ -22,7 +23,7 @@ const AllPackages = () => {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-screen bg-base-100">
-                <div className="text-2xl font-signikaText text-[#263a88]">Loading Packages...</div>
+                <LoadingSpinner/>
             </div>
         );
     }

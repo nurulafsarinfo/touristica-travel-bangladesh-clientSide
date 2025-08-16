@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import LoadingSpinner from '../../../Components/Shared/LoadingSpinner';
 
 const ManageStories = () => {
     const { user } = useAuth();
@@ -47,7 +48,7 @@ const ManageStories = () => {
         });
     };
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <LoadingSpinner/>;
 
     return (
         <div className="container mx-auto p-8">
