@@ -24,9 +24,9 @@ const DashboardLayout = () => {
     if (roleLoading) return <LoadingSpinner/>;
 
     return (
-        <div className="min-h-screen flex font-signikaText text-[#263a88] bg-[#d1dbff]">
+        <div className="max-h-screen flex font-signikaText text-[#263a88] bg-[#d1dbff]">
             {/* Mobile Sidebar Toggle */}
-            <div className="md:hidden fixed top-4 right-4 z-50">
+            <div className="max-h-screen md:hidden fixed top-4 right-4 z-50">
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                     className="p-1 rounded-md bg-white/90 shadow-md"
@@ -42,7 +42,7 @@ const DashboardLayout = () => {
 
             {/* Sidebar */}
             <aside
-                className={`fixed md:static top-0 left-0 z-40 h-screen md:h-auto w-64 bg-white shadow-xl border-r border-[#0ea5e9] overflow-y-auto transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed md:static top-0 left-0 z-40 h-screen md:h-auto min-w-64 bg-white shadow-xl border-r border-[#0ea5e9] overflow-y-auto transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     } md:translate-x-0 transition-transform duration-200 ease-in-out`}
             >
                 <NavLink to={'/'}>
@@ -140,7 +140,7 @@ const DashboardLayout = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 p-4 md:p-8">
+            <main className="flex-1 p-4 md:p-8 overflow-y-auto">
                 <Outlet />
             </main>
         </div>

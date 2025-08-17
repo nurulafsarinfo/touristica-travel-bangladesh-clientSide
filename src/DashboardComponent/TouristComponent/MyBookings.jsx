@@ -102,9 +102,10 @@ console.log('booking info count', bookingInfo)
   if (isLoading) return <LoadingSpinner/>;
 
   return (
-    <div className="max-w-7xl mx-auto p-4 font-signikaText">
+    <div className="max-w-4xl min-h-screen mx-auto font-signikaText">
 
       {/* step: 3  */}
+
       {
         showCongratulations && (
           <>
@@ -130,7 +131,7 @@ console.log('booking info count', bookingInfo)
         )
       }
 
-      <h2 className="text-2xl font-bold text-[#263a88] mb-6">My Bookings</h2>
+      <h2 className="text-2xl font-medium text-[#263a88] mb-6">My Bookings</h2>
 
       <div className="bg-base-100 shadow rounded-lg overflow-hidden">
         {/* Scrollable Table Wrapper */}

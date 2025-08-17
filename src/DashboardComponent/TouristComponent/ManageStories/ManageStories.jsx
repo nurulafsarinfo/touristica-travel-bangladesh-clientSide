@@ -53,8 +53,8 @@ const ManageStories = () => {
     if (isLoading) return <LoadingSpinner/>;
 
     return (
-        <div className="container mx-auto p-8">
-            <h1 className="text-3xl font-bold mb-8">Manage Your Stories</h1>
+        <div className="container min-h-screen mx-auto ">
+            <h1 className="text-2xl font-medium text-[#263a88] mb-6">Manage Your Stories</h1>
             {
                 stories.length === 0 && 
                     <div className='flex flex-col items-center justify-center h-[70vh]'> 
@@ -64,19 +64,19 @@ const ManageStories = () => {
                         </NavLink>   
                     </div>
             }
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stories.map(story => (
                     <div key={story._id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-                        <img src={story.images[0]} alt={story.title} className="w-full h-48 object-cover" />
-                        <div className="p-4 flex-grow">
-                            <h2 className="text-xl font-bold mb-2">{story.title}</h2>
-                            <p className="text-gray-600 text-sm line-clamp-3">{story.storyText}</p>
+                        <img src={story.images[0]} alt={story.title} className="w-full h-42 object-cover" />
+                        <div className="p-2 flex-grow">
+                            <h2 className="text-md font-bold mb-2">{story.title}</h2>
+                            <p className="text-gray-600 text-[10px] line-clamp-3">{story.storyText}</p>
                         </div>
                         <div className="p-4 bg-gray-50 flex justify-end space-x-2">
-                            <Link to={`/dashboard/edit-story/${story._id}`} className="btn btn-sm btn-outline btn-info">
+                            <Link to={`/dashboard/edit-story/${story._id}`} className="btn btn-sm btn-outline btn-info text-[10px]">
                                 Edit
                             </Link>
-                            <button onClick={() => handleDelete(story._id)} className="btn btn-sm btn-outline btn-error">
+                            <button onClick={() => handleDelete(story._id)} className="btn btn-sm btn-outline btn-error text-[10px] py-1">
                                 Delete
                             </button>
                         </div>

@@ -98,10 +98,10 @@ const Add_Story = () => {
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen p-4 sm:p-6 lg:p-8">
+        <div className=" min-h-screen">
             <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-[#263a88]">Share Your Adventure</h2>
+                    <h2 className="text-2xl font-medium text-[#263a88]">Share Your Adventure</h2>
                     <p className="text-gray-500 mt-2">Let the world know about your amazing experiences.</p>
                 </div>
 

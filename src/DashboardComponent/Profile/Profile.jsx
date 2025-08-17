@@ -66,7 +66,7 @@ const Profile = () => {
     }
 
     return (
-        <div className="max-w-3xl mx-auto p-6 mt-10 bg-white shadow-xl rounded-2xl font-signikaText">
+        <div className="max-w-4xl min-h-screen mx-auto p-6 bg-white shadow-xl rounded-2xl font-signikaText">
             <h2 className="text-2xl font-raleway text-[#263a88] mb-4">Welcome back, <span className="font-bold">{user?.displayName}</span></h2>
 
             <div className="flex flex-col sm:flex-row items-center gap-6">

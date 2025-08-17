@@ -89,9 +89,9 @@ const AddPackage = () => {
     };
 
     return (
-        <div className="bg-gray-50 p-4 sm:p-8 min-h-screen">
-            <div className="max-w-4xl mx-auto p-6 sm:p-8 bg-white shadow-lg rounded-xl">
-                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">Add New Tour Package</h2>
+        <div className="">
+            <div className="max-w-4xl min-h-screen mx-auto p-6 sm:p-8 bg-white shadow-lg rounded-xl">
+                <h2 className="text-2xl font-medium text-[#263a88] mb-6 text-center">Add New Tour Package</h2>
                 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                     {/* Basic Package Information */}

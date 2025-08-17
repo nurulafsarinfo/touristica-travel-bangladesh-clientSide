@@ -67,9 +67,9 @@ const ManageUsers = () => {
     };
 
     return (
-        <div className="bg-gray-50 p-4 sm:p-8 min-h-screen">
-            <div className="max-w-7xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">Manage Users</h2>
+        <div className="">
+            <div className="max-w-7xl min-h-screen mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                <h2 className="text-2xl font-medium text-[#263a88] mb-6">Manage Users</h2>
 
                 {/* Filters and Search Bar */}
                 <div className="flex flex-col md:flex-row gap-4 mb-6">
