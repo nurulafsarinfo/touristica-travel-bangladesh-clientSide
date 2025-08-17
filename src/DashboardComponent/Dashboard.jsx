@@ -2,13 +2,13 @@ import React from 'react';
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className='min-h-screen'>
             <header className="mb-6">
                 <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-raleway text-[#0ea5e9]">
                     Dashboard
                 </h1>
                 <p className="mt-2 text-sm md:text-base text-[#263a88]/70">
-                    Welcome to the{" "}
+                    Welcome to the
                     <span className="font-logoText text-[#f050a6]">Touristica</span> dashboard!
                 </p>
             </header>

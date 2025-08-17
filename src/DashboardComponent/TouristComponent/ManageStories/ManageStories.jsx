@@ -67,9 +67,9 @@ const ManageStories = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stories.map(story => (
                     <div key={story._id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-                        <img src={story.images[0]} alt={story.title} className="w-full h-42 object-cover" />
+                        <img src={story.images[0]} alt={story.title} className="w-full h-42 lg:h-36 object-cover" />
                         <div className="p-2 flex-grow">
-                            <h2 className="text-md font-bold mb-2">{story.title}</h2>
+                            <h2 className="text-md md:text-sm font-bold mb-2">{story.title}</h2>
                             <p className="text-gray-600 text-[10px] line-clamp-3">{story.storyText}</p>
                         </div>
                         <div className="p-4 bg-gray-50 flex justify-end space-x-2">

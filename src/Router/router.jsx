@@ -25,6 +25,7 @@ import AdminRoute from '../Routes/AdminRoute';
 import Community from '../Pages/Community/Community';
 import AboutUs from '../Pages/About Us/AboutUs';
 import GuideRoute from '../Routes/GuideRoute';
+import NotFoundPage from '../Components/NotFoundPage';
 
 const router = createBrowserRouter([
     {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
             {
                 path: '/forbidden',
                 Component: Forbidden
+            },
+            {
+                path: '*',
+                Component: NotFoundPage
             }
         ]
     },

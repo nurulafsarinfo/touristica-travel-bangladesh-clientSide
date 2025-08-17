@@ -85,9 +85,9 @@ const TourismSection = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {packages.map(pkg => (
 
-                                <div key={pkg._id} className="bg-white rounded-xl shadow hover:shadow-xl transition p-4">
+                                <div key={pkg._id} className="flex flex-col bg-white rounded-xl shadow hover:shadow-xl transition p-4">
                                     <img src={pkg.images[0]} alt={pkg.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-                                    <h3 className="text-xl font-bold text-[#263a88] mb-1">{pkg.title}</h3>
+                                    <h3 className="flex-grow text-xl font-bold text-[#263a88] mb-1">{pkg.title}</h3>
                                     <p className="text-sm text-gray-500 mb-1">{pkg.type}</p>
                                     <div className='flex justify-between'>
                                         <p className="text-[#f050a6] font-semibold text-lg mb-3">${pkg.price}</p>
@@ -97,7 +97,7 @@ const TourismSection = () => {
 
                                     <Link
                                         to={`/packages/${pkg._id}`}
-                                        className="inline-block bg-[#0ea5e9] text-white px-4 py-2 rounded hover:bg-[#0ea5e9]/90"
+                                        className="w-32 text-center inline-block bg-[#0ea5e9] text-white px-4 py-2 rounded hover:bg-[#0ea5e9]/90"
                                     >
                                         View Details
                                     </Link>
