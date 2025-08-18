@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { FaDollarSign, FaStar, FaClock } from 'react-icons/fa';
@@ -9,6 +9,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 const AllPackages = () => {
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
+    const [ sortOrder, setSortOrder ] = useState('');
 
     // Fetch all packages using React Query and a real API call
     const { data: packages = [], isLoading, error } = useQuery({
@@ -19,6 +20,29 @@ const AllPackages = () => {
         },
     });
 
+    
+    const sortedPackages = useMemo(() => {
+        const packagesCopy = [...packages];
+
+        
+
+        if(sortOrder === 'latest'){
+            console.log('clicked latest')
+            return packagesCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt) );
+
+        };
+
+        if(sortOrder === 'oldest'){
+             console.log('clicked oldest')
+            return packagesCopy.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt) );
+        }
+
+        return packagesCopy;
+
+    }, [packages, sortOrder])
+
+
+
     // Handle Loading State
     if (isLoading) {
         return (
@@ -27,7 +51,7 @@ const AllPackages = () => {
             </div>
         );
     }
-
+    
     // Handle Error State
     if (error) {
         return (
@@ -41,11 +65,11 @@ const AllPackages = () => {
     }
 
     return (
-        <div className="bg-base-100 py-12 md:py-20 font-signikaText">
+        <div className="bg-base-100 py-8 md:py-10 font-signikaText">
             <div className="max-w-11/12 mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Page Header */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-4">
                     <h1 className="text-4xl md:text-5xl font-raleway font-bold text-[#263a88]">
                         Discover Our Tours
                     </h1>
@@ -53,9 +77,26 @@ const AllPackages = () => {
                         Explore our curated list of unforgettable journeys. Find the perfect adventure that awaits you.</p>
                 </div>
 
+
+
+                {/* section of sorting stories  */}
+                <div className='flex justify-end'>
+                    <select 
+                        value={sortOrder}
+                        onChange={(e) => setSortOrder(e.target.value)}
+                        className='border border-blue-500 rounded-md px-4 mb-4'
+                    >
+                        <option value="" disabled>--Sort by--</option>
+                        <option value={"latest"}>Sort by Latest</option>
+                        <option value={"oldest"}>Sort by Oldest</option>
+                    </select>
+                </div>
+
+
+
                 {/* Responsive Grid for Package Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                    {packages.map((pkg) => (
+                    {sortedPackages.map((pkg) => (
                         <div
                             key={pkg._id}
                             className="card bg-white shadow-lg hover:shadow-2xl transition-shadow duration-800 rounded-lg overflow-hidden flex flex-col group"

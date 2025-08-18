@@ -79,6 +79,7 @@ const AddPackage = () => {
 
         const packageData = {
             ...data,
+            createdAt: new Date().toISOString(),
             images: imageUrls,
             price: parseFloat(data.price),
             duration: parseInt(data.duration),
