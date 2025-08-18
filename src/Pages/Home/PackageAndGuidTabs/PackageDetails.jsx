@@ -46,7 +46,7 @@ const PackageDetails = () => {
 
     // console.log('passcksasge data from  details', packages)
     // console.log('passcksasge data from  details')
-    // console.log('guide data from package details', guides)
+    console.log('guide data from package details', guides)
 
 
     // for shuffle img

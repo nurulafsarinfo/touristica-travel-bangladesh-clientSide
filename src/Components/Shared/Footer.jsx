@@ -36,7 +36,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/community"
+                                to="/all-stories"
                                 className="hover:text-indigo-600 transition-colors duration-300"
                             >
                                 Community
@@ -44,7 +44,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/about"
+                                to="/about-us"
                                 className="hover:text-indigo-600 transition-colors duration-300"
                             >
                                 About Us
@@ -52,7 +52,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="/trips"
+                                to="/all-trips"
                                 className="hover:text-indigo-600 transition-colors duration-300"
                             >
                                 Trips

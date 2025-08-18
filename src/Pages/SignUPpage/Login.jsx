@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import loginImg from "../../assets/Undraw Traveling.svg"; // যে ইমেজ রেজিস্ট্রেশনে ইউজ করেছো
 import SocialLogin from "./SocialLogin";
 import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -19,28 +20,35 @@ const Login = () => {
     const password = e.target.password.value;
 
 
-
-    axiosPublic.post('/jwt', {email: email})
-      .then(res => {
-        if(res.data.token) {
-          localStorage.setItem('access-token', res.data.token);
-          navigate(from, { replace: true });
-        };
-      });
-
-
-
-
     try {
-      signIn(email, password).then((result) => {
-        console.log("User signed in", result.user);
+      const result = await signIn(email, password)
+      console.log("User signed in", result.user);
+      
+      const res = await axiosPublic.post('/jwt', {email: email});
+      if (res.data.token) {
+        localStorage.setItem('access-token', res.data.token);
+
         navigate(from, { replace: true });
-      });
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful!',
+          showConfirmButton: 1500,
+          timer: 1500
+        })
+      }
+
     } catch (err) {
       setError("Invalid email or password!");
       console.error(err.message);
+            Swal.fire({
+                icon: "error",
+                title: "Login Failed",
+                text: "Invalid email or password. Please try again.",
+            });
+        }
     }
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#d1dbff] via-white to-[#d1dbff] flex items-center justify-center p-4">
