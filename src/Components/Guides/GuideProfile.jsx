@@ -25,11 +25,13 @@ const GuideProfile = () => {
   const { data: stories, error: errorStories } = useQuery({
     queryKey: ['guideStories', id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/stories/${guide?.email}`);
+      const res = await axiosSecure.get(`/stories?email=${guide?.email}`);
       return res.data;
     },
     enabled: !!id, // Only run query if id is available
   });
+
+  console.log('from guide profile story-', stories)
   
   const isLoading = isLoadingProfile ;
 
@@ -88,6 +90,8 @@ const GuideProfile = () => {
           </div>
         </div>
 
+
+
         {/* Stories Section */}
         <div className="mt-16">
           <h2 className="text-3xl font-raleway font-bold text-[#263a88] text-center mb-10">
@@ -98,14 +102,14 @@ const GuideProfile = () => {
               {stories?.map(story => (
                 <div key={story._id} className="bg-white rounded-lg shadow-lg overflow-hidden group transition-transform duration-300 hover:-translate-y-2">
                   <figure className="h-56 overflow-hidden">
-                    <img src={story.spotPhoto} alt={story.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <img src={story.images[0]} alt={story.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </figure>
                   <div className="p-6">
                     <h3 className="text-xl font-bold font-raleway text-[#263a88] mb-2">{story.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4 h-16">{story.content}</p>
-                    <Link to={`/story/${story._id}`} className="font-bold text-[#f050a6] hover:underline">
+                    <p className="text-gray-600 text-sm mb-4 h-16">{story.storyText}</p>
+                    {/* <Link to={`/story/${story._id}`} className="font-bold text-[#f050a6] hover:underline">
                       Read More &rarr;
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               ))}
